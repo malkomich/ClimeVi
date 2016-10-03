@@ -22,7 +22,7 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
     private static final String TAG = PlaceSearchFragment.class.getName();
 
     private PlaceSearchPresenter presenter;
-    private OnPlaceUpdatedListener onPlaceUpdatedListenerListener;
+    private OnPlaceUpdatedListener onPlaceUpdatedListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            onPlaceUpdatedListenerListener = (OnPlaceUpdatedListener) context;
+            onPlaceUpdatedListener = (OnPlaceUpdatedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnPlaceUpdatedListener");
         }
@@ -58,6 +58,7 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
 
     @Override
     public void updatePlace(GeoInfo geoInfo) {
-        onPlaceUpdatedListenerListener.onPlaceUpdated(geoInfo);
+        onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
+        presenter.saveRequest(geoInfo, getContext());
     }
 }

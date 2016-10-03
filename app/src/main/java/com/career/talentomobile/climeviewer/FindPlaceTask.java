@@ -10,13 +10,13 @@ import com.google.android.gms.location.places.Place;
 /**
  * Created by malkomich on 02/10/2016.
  */
-public class LocationsGetter extends AsyncTask<Place, Void, GeoInfo> {
+public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
 
-    private static final String TAG = LocationsGetter.class.getName();
+    private static final String TAG = FindPlaceTask.class.getName();
 
     private OnGeoLocationInfo listener;
 
-    public LocationsGetter(OnGeoLocationInfo listener) {
+    public FindPlaceTask(OnGeoLocationInfo listener) {
         super();
         this.listener = listener;
     }

@@ -23,7 +23,7 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splash_creen);
 
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.splash_screen);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.up_half);
         LinearLayout animView = (LinearLayout) findViewById(R.id.splashLayout);
         animView.setAnimation(anim);
 

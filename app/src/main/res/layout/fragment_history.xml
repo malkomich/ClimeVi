@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <ImageView
+        android:background="@android:color/black"
+        android:scaleType = "centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.3">
+    </ImageView>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+</FrameLayout>

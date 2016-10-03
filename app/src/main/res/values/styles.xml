@@ -21,4 +21,12 @@
         <item name="cardElevation">@dimen/elevation</item>
     </style>
 
+    <style name="ListView.History" parent="Base.Widget.AppCompat.ListView.Menu">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+        <item name="android:paddingLeft">@dimen/margin_small</item>
+        <item name="android:paddingTop">@dimen/margin_medium</item>
+        <item name="android:paddingRight">@dimen/margin_small</item>
+        <item name="android:paddingBottom">@dimen/margin_medium</item>
+    </style>
+
 </resources>
