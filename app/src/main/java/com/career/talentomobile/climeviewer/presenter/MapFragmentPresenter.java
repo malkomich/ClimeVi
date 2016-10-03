@@ -38,6 +38,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     GoogleMap.OnMyLocationButtonClickListener{
 
     private static final String TAG = MapFragmentPresenter.class.getName();
+    private static final float DEFAULT_ZOOM = 8.0f;
 
     private MapFragmentView view;
     private GoogleMap mMap;
@@ -149,7 +150,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
 
         //stop location updates
         if (mApiClient != null) {
@@ -194,13 +195,19 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
 
     public void updateLocation(GeoInfo geoInfo) {
         Log.d(TAG, "updateLocation");
+
+        LatLng placeCoords = new LatLng(geoInfo.getPlaceCoordinates().getLatitude(),
+            geoInfo.getPlaceCoordinates().getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(placeCoords));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
+
         for(GeoStation station: geoInfo.getStations()) {
-            Log.d(TAG, "updateLocation: " + station.getLatitude() + ", " + station.getLongitude());
-            LatLng latLng = new LatLng(station.getLatitude(), station.getLongitude());
+            LatLng stationCoords = new LatLng(station.getCoordinates().getLatitude(),
+                station.getCoordinates().getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
+            markerOptions.position(stationCoords);
             markerOptions.title("Station");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
             mCurrLocationMarker = mMap.addMarker(markerOptions);
         }
     }

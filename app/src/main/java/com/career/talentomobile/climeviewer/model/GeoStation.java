@@ -1,6 +1,11 @@
 package com.career.talentomobile.climeviewer.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by malkomich on 03/10/2016.
@@ -10,12 +15,20 @@ public class GeoStation {
     private static final String BBOX = "bbox";
     private static final String LAT = "lat";
     private static final String LON = "lng";
+    private static final String I18N_NAMES = "alternateNames";
+    private static final String NAME_NAME = "name";
+    private static final String NAME_LANG = "lang";
+    private static final String NAME_PREFERRED = "isPreferredName";
 
     private GeoPoints geoPoints;
-    private double latitude;
-    private double longitude;
+    private Coordinates coordinates;
+    private Map<String, String> names;
+    private String preferredName;
 
     public GeoStation(JSONObject json) {
+
+        Double latitude = null;
+        Double longitude = null;
 
         if (json.has(BBOX)) {
             geoPoints = new GeoPoints(json.optJSONObject(BBOX));
@@ -25,6 +38,27 @@ public class GeoStation {
         }
         if (json.has(LON)) {
             longitude = json.optDouble(LON);
+        }
+        if(latitude != null && longitude != null) {
+            coordinates = new Coordinates(latitude, longitude);
+        }
+        if (json.has(I18N_NAMES)) {
+            names = new HashMap<>();
+            JSONArray namesJSONArray = json.optJSONArray(I18N_NAMES);
+            try {
+                for (int i = 0; i < namesJSONArray.length(); i++) {
+                    JSONObject jsonName = (JSONObject) namesJSONArray.get(i);
+
+                    String name = jsonName.optString(NAME_NAME);
+                    boolean preferred = jsonName.optBoolean(NAME_PREFERRED, false);
+                    names.put(jsonName.optString(NAME_LANG), name);
+                    if(preferred) {
+                        preferredName = name;
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -38,21 +72,19 @@ public class GeoStation {
     }
 
     /**
-     * Gets the latitude of the geo location
+     * Gets the coordinates of the station
      *
-     * @return Latitude
+     * @return coordinates
      */
-    public double getLatitude() {
-        return latitude;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     /**
-     * Gets the longitude of the geo location
-     *
-     * @return Longitude
+     * Gets the name of the station in a given language.
      */
-    public double getLongitude() {
-        return longitude;
+    public String getName(String lang) {
+        return names.containsKey(lang) ? names.get(lang) : preferredName;
     }
 
     /**

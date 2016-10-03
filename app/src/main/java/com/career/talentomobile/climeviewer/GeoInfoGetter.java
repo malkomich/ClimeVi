@@ -1,6 +1,7 @@
 package com.career.talentomobile.climeviewer;
 
 import com.career.talentomobile.climeviewer.model.GeoInfo;
+import com.google.android.gms.location.places.Place;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,8 +23,8 @@ public class GeoInfoGetter {
 
     private GeoInfo geoInfo;
 
-    public GeoInfoGetter(String place) {
-        URL url = buildURL(place);
+    public GeoInfoGetter(Place place) {
+        URL url = buildURL(place.getName().toString());
         if(url != null) {
             doRequest(url, place);
         }
@@ -46,7 +47,7 @@ public class GeoInfoGetter {
      * @param url
      *            Service URL
      */
-    private void doRequest(URL url, String place) {
+    private void doRequest(URL url, Place place) {
 
         StringBuilder output = new StringBuilder();
 
@@ -85,7 +86,7 @@ public class GeoInfoGetter {
      * @param output
      *            Service Data result
      */
-    private void parseOutput(String output, String place) {
+    private void parseOutput(String output, Place place) {
 
         JSONObject json = null;
         try {
@@ -99,7 +100,7 @@ public class GeoInfoGetter {
         }
     }
 
-    protected void init(JSONObject json, String place) {
+    protected void init(JSONObject json, Place place) {
         geoInfo = new GeoInfo(json, place);
     }
 

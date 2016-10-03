@@ -26,7 +26,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
     @Override
     public void onPlaceSelected(Place place) {
         Log.i(TAG, "Place: " + place.getName());
-        new LocationsGetter(this).execute(place.getName().toString());
+        new LocationsGetter(this).execute(place);
     }
 
     @Override
