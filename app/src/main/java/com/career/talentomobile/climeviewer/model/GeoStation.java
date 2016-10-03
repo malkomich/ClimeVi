@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class GeoStation {
 
-    private static final String BBOX = "bbox";
+    public static final String BBOX = "bbox";
     private static final String LAT = "lat";
     private static final String LON = "lng";
     private static final String I18N_NAMES = "alternateNames";
@@ -22,7 +22,7 @@ public class GeoStation {
 
     private GeoPoints geoPoints;
     private Coordinates coordinates;
-    private Map<String, String> names;
+    private Map<String, String> names = new HashMap<>();
     private String preferredName;
 
     public GeoStation(JSONObject json) {
@@ -43,7 +43,6 @@ public class GeoStation {
             coordinates = new Coordinates(latitude, longitude);
         }
         if (json.has(I18N_NAMES)) {
-            names = new HashMap<>();
             JSONArray namesJSONArray = json.optJSONArray(I18N_NAMES);
             try {
                 for (int i = 0; i < namesJSONArray.length(); i++) {

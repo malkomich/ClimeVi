@@ -24,10 +24,13 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Locale;
 
 /**
  * Created by malkomich on 03/10/2016.
@@ -38,7 +41,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     GoogleMap.OnMyLocationButtonClickListener{
 
     private static final String TAG = MapFragmentPresenter.class.getName();
-    private static final float DEFAULT_ZOOM = 8.0f;
+    private static final float DEFAULT_ZOOM = 9.0f;
 
     private MapFragmentView view;
     private GoogleMap mMap;
@@ -100,7 +103,8 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
             double lng = mLastLocation.getLongitude();
 
             LatLng loc = new LatLng(lat, lng);
-            mMap.addMarker(new MarkerOptions().position(loc).title("New Marker"));
+            MarkerOptions markerOptions = createMarkOptions(loc, "Current Position", null);
+            mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         }
         LocationRequest mLocationRequest = new LocationRequest();
@@ -140,19 +144,17 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
+        // Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        MarkerOptions markerOptions = createMarkOptions(latLng, "Current Position",
+            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
-        //move map camera
+        // Move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
 
-        //stop location updates
+        // Stop location updates
         if (mApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mApiClient, this);
         }
@@ -204,11 +206,23 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         for(GeoStation station: geoInfo.getStations()) {
             LatLng stationCoords = new LatLng(station.getCoordinates().getLatitude(),
                 station.getCoordinates().getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(stationCoords);
-            markerOptions.title("Station");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+            String countryCode = Locale.getDefault().getCountry().toLowerCase();
+            String markTitle = station.getName(countryCode) != null ? station.getName(countryCode) :
+                geoInfo.getPlaceName();
+            MarkerOptions markerOptions = createMarkOptions(stationCoords, markTitle,
+                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
             mCurrLocationMarker = mMap.addMarker(markerOptions);
         }
+    }
+
+    private MarkerOptions createMarkOptions(LatLng coords, String title, BitmapDescriptor icon) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(coords);
+        markerOptions.title(title);
+        if(icon != null) {
+            markerOptions.icon(icon);
+        }
+
+        return markerOptions;
     }
 }

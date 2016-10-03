@@ -35,7 +35,9 @@ public class GeoInfo {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 
                 GeoStation geoStation = new GeoStation(jsonItem);
-                stations.add(geoStation);
+                if(jsonItem.has(GeoStation.BBOX)) {
+                    stations.add(geoStation);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
