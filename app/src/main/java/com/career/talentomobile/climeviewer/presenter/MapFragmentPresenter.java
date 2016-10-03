@@ -81,6 +81,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         mMap = googleMap;
         initMapsApi();
         mMap.setOnMyLocationButtonClickListener(this);
+
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
     }
 
     @Override
