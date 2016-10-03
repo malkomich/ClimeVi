@@ -15,6 +15,7 @@
         android:id="@+id/search_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_huge"
         android:name="com.career.talentomobile.climeviewer.ui.fragment.PlaceSearchFragment"/>
 
     <android.support.design.widget.FloatingActionButton

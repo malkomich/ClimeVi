@@ -4,5 +4,8 @@
     <dimen name="text_size_huge">40sp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+    <dimen name="elevation">10dp</dimen>
 
 </resources>

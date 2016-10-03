@@ -1,31 +1,30 @@
 package com.career.talentomobile.climeviewer.ui.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
-import com.career.talentomobile.climeviewer.LocationsGetter;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
+import com.career.talentomobile.climeviewer.presenter.PlaceSearchPresenter;
+import com.career.talentomobile.climeviewer.ui.view.PlaceSearchView;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 /**
  * Created by malkomich on 03/10/2016.
  */
-
-public class PlaceSearchFragment extends Fragment {
+public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView {
 
     private static final String TAG = PlaceSearchFragment.class.getName();
+
+    private PlaceSearchPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new PlaceSearchPresenter(this);
     }
 
     @Nullable
@@ -35,22 +34,14 @@ public class PlaceSearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_place_autocomplete, container, false);
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-            getFragmentManager().findFragmentById(R.id.place_autocomplete);
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
-                new LocationsGetter().execute(place.getName().toString());
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
+            getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete);
+        autocompleteFragment.setOnPlaceSelectedListener(presenter);
 
         return view;
+    }
+
+    @Override
+    public void makeToast(String msg) {
+        Toast.makeText(getActivity(), msg ,Toast.LENGTH_SHORT).show();
     }
 }
