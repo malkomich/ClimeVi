@@ -55,14 +55,10 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     }
 
     public void initMapsApi() {
-        Log.d(TAG, "Init: 1");
         if(view.checkLocationPermission()) {
-            Log.d(TAG, "Init: 2");
             if(mApiClient == null) {
-                Log.d(TAG, "Init: 3");
                 view.buildGoogleApiClient();
             }
-            Log.d(TAG, "Init: 4");
             mMap.setMyLocationEnabled(true);
         }
     }

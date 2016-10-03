@@ -42,6 +42,4 @@ dependencies {
 
     compile "com.android.support:cardview-v7:24.0.0"
     compile 'com.android.support:design:24.0.0'
-    compile group: 'org.springframework.android', name: 'spring-android-rest-template', version: '2.0.0.M3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.3'
 }
