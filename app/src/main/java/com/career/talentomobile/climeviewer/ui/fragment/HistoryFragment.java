@@ -18,6 +18,7 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.presenter.HistoryPresenter;
 import com.career.talentomobile.climeviewer.ui.view.HistoryView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,6 +54,7 @@ public class HistoryFragment extends ListFragment implements HistoryView {
 
     @Override
     public void setItems(List<GeoInfo> items) {
+        Collections.reverse(items);
         setListAdapter(new HistoryAdapter(getActivity(), R.layout.history_row, items));
     }
 

@@ -8,5 +8,6 @@
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_huge">64dp</dimen>
     <dimen name="elevation">10dp</dimen>
+    <dimen name="slide_height">200dp</dimen>
 
 </resources>

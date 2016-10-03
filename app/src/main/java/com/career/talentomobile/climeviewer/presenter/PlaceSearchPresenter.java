@@ -52,12 +52,21 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
      */
     public boolean saveRequest(GeoInfo geoInfo, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences(MainActivity.HISTORY, 0);
-        int length = prefs.getInt(MainActivity.HISTORY_LENGTH, 0);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);
         Gson gson = new Gson();
-        String json = gson.toJson(geoInfo);
-        editor.putString(MainActivity.HISTORY_ITEM + "_" + length, json);
-        return editor.commit();
+
+        int length = prefs.getInt(MainActivity.HISTORY_LENGTH, 0);
+
+        String prevJson = prefs.getString(MainActivity.HISTORY_ITEM + "_" + (length - 1), null);
+        GeoInfo prevEntry = gson.fromJson(prevJson, GeoInfo.class);
+
+        Log.d(TAG, "saveRequest: " + geoInfo.getPlaceName() + ", PREV: " + prevEntry.getPlaceName());
+        if(!prevEntry.getPlaceCoordinates().equals(geoInfo.getPlaceCoordinates())) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);
+            String json = gson.toJson(geoInfo);
+            editor.putString(MainActivity.HISTORY_ITEM + "_" + length, json);
+            return editor.commit();
+        }
+        return true;
     }
 }
