@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView android:background="@drawable/bg_sky"
-               android:scaleType = "centerCrop"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:alpha="0.5">
+    <ImageView
+        android:background="@drawable/bg_sky"
+        android:scaleType = "centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5">
     </ImageView>
 
-    <LinearLayout android:id="@+id/splashLayout"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:gravity="center">
+    <LinearLayout
+        android:id="@+id/splashLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-        <ImageView android:id="@+id/splashscreen"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:src="@drawable/ic_splash_image"
-                   android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/splashscreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_splash_image"
+            android:layout_gravity="center"/>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
 
     </LinearLayout>
 

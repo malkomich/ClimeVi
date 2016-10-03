@@ -1,4 +1,4 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.career.talentomobile.climeviewer.R;
 
 /**
  * Created by malkomich on 01/10/2016.
@@ -31,10 +32,11 @@ public class SplashScreenActivity extends Activity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashScreenActivity.this, MapViewActivity.class);
+                Intent mainIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 startActivity(mainIntent);
                 finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+
 }

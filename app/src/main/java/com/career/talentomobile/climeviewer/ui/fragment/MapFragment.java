@@ -1,4 +1,4 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.ui.fragment;
 
 import android.Manifest;
 import android.content.IntentSender;
@@ -9,11 +9,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.career.talentomobile.climeviewer.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -26,9 +31,10 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -37,12 +43,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * Created by malkomich on 01/10/2016.
+ * Created by malkomich on 03/10/2016.
  */
-public class MapViewActivity extends FragmentActivity
-    implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks,
-    GoogleApiClient.OnConnectionFailedListener, OnMyLocationButtonClickListener,
+
+public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks,
+    GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMyLocationButtonClickListener,
     ResultCallback<LocationSettingsResult> {
+
+    private static final String TAG = MapFragment.class.getName();
 
     /**
      * Request code for location permission request.
@@ -64,21 +72,32 @@ public class MapViewActivity extends FragmentActivity
     private Marker mCurrLocationMarker;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_view);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        return view;
     }
 
     @Override
     public void onPause() {
+
+        Log.d(TAG, "onPause");
+
         super.onPause();
 
         // Stop location updates when Activity is no longer active
@@ -89,6 +108,9 @@ public class MapViewActivity extends FragmentActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        Log.d(TAG, "onMapReady");
+
         mMap = googleMap;
 
         buildGoogleApiClient();
@@ -98,25 +120,37 @@ public class MapViewActivity extends FragmentActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+
+        Log.d(TAG, "onMyLocationButtonClick");
+
+        Toast.makeText(getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mApiClient = new GoogleApiClient.Builder(this)
+
+        Log.d(TAG, "buildGoogleApiClient");
+
+        mApiClient = new GoogleApiClient.Builder(getActivity())
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
             .addApi(LocationServices.API)
+            .addApi(Places.GEO_DATA_API)
+            .addApi(Places.PLACE_DETECTION_API)
+            .enableAutoManage((FragmentActivity) getActivity(), this)
             .build();
         mApiClient.connect();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+
+        Log.d(TAG, "onConnected");
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
             Manifest.permission.ACCESS_COARSE_LOCATION
         ) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -130,7 +164,6 @@ public class MapViewActivity extends FragmentActivity
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mApiClient);
         if (mLastLocation != null) {
-            Log.d("onConnected", mLastLocation.toString());
             double lat = mLastLocation.getLatitude();
             double lng = mLastLocation.getLongitude();
 
@@ -151,7 +184,7 @@ public class MapViewActivity extends FragmentActivity
             LocationServices.SettingsApi.checkLocationSettings(mApiClient, builder.build());
         result.setResultCallback(this);
 
-        if (ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(getActivity(),
             Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
             Log.d("onConnected", "REQUEST LOCATION UPDATES");
@@ -162,30 +195,24 @@ public class MapViewActivity extends FragmentActivity
     @Override
     public void onConnectionSuspended(int i) {
         // TODO:
-        Log.d("onConnectionSuspended", "Connection suspended");
+        Log.d(TAG, "onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // TODO:
-        Log.d("onConnectionFailed", "Connection failed");
-    }
-
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
-            mPermissionDenied = false;
-        }
+        Log.d(TAG, "onConnectionFailed");
     }
 
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */
     private void enableMyLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+
+        Log.d(TAG, "enableMyLocation");
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -195,7 +222,9 @@ public class MapViewActivity extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("onLocationChanged", "LOCATION CHANGE");
+
+        Log.d(TAG, "onLocationChanged");
+
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
@@ -220,12 +249,15 @@ public class MapViewActivity extends FragmentActivity
     }
 
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
+
+        Log.d(TAG, "onRequestPermissionsResult");
+
+        if (ContextCompat.checkSelfPermission(getActivity(),
             Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 //TODO:
@@ -235,14 +267,14 @@ public class MapViewActivity extends FragmentActivity
 
                 //Prompt the user once explanation has been shown
                 //(just doing it here for now, note that with this code, no explanation is shown)
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -255,6 +287,9 @@ public class MapViewActivity extends FragmentActivity
     @Override
     public void onRequestPermissionsResult(int requestCode,
         String permissions[], int[] grantResults) {
+
+        Log.d(TAG, "onRequestPermissionsResult");
+
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -263,7 +298,7 @@ public class MapViewActivity extends FragmentActivity
 
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this,
+                    if (ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
 
@@ -277,7 +312,7 @@ public class MapViewActivity extends FragmentActivity
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -289,6 +324,9 @@ public class MapViewActivity extends FragmentActivity
 
     @Override
     public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+
+        Log.d(TAG, "onResult");
+
         final Status status = locationSettingsResult.getStatus();
         final LocationSettingsStates state = locationSettingsResult.getLocationSettingsStates();
         switch (status.getStatusCode()) {
@@ -302,7 +340,7 @@ public class MapViewActivity extends FragmentActivity
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    status.startResolutionForResult(this, 1000);
+                    status.startResolutionForResult(getActivity(), 1000);
                 } catch (IntentSender.SendIntentException e) {
                     // Ignore the error.
                 }
