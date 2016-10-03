@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         Log.d(TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_view);
+        setContentView(R.layout.activity_main);
 
     }
 
