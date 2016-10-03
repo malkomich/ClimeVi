@@ -13,7 +13,6 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 /**
  * Created by malkomich on 03/10/2016.
  */
-
 public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocationInfo {
 
     private static final String TAG = PlaceSearchPresenter.class.getName();
@@ -37,6 +36,6 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
 
     @Override
     public void onGeoLocationInfo(GeoInfo geoInfo) {
-        view.makeToast(geoInfo.getName());
+        view.updatePlace(geoInfo);
     }
 }

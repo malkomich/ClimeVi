@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Created by malkomich on 03/10/2016.
  */
-
 public class GeoInfo {
 
     private static final String GEO_STATIONS = "geonames";

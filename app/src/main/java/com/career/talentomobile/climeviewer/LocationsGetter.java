@@ -9,7 +9,6 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 /**
  * Created by malkomich on 02/10/2016.
  */
-
 public class LocationsGetter extends AsyncTask<String, Void, GeoInfo> {
 
     private static final String TAG = LocationsGetter.class.getName();

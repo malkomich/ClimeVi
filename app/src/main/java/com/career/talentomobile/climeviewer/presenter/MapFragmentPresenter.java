@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.career.talentomobile.climeviewer.model.GeoInfo;
+import com.career.talentomobile.climeviewer.model.GeoStation;
 import com.career.talentomobile.climeviewer.ui.view.MapFragmentView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -187,6 +189,19 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
                 // Location settings are not satisfied. However, we have no way to fix the
                 // settings so we won't show the dialog.
                 break;
+        }
+    }
+
+    public void updateLocation(GeoInfo geoInfo) {
+        Log.d(TAG, "updateLocation");
+        for(GeoStation station: geoInfo.getStations()) {
+            Log.d(TAG, "updateLocation: " + station.getLatitude() + ", " + station.getLongitude());
+            LatLng latLng = new LatLng(station.getLatitude(), station.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Station");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            mCurrLocationMarker = mMap.addMarker(markerOptions);
         }
     }
 }

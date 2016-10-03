@@ -1,13 +1,15 @@
 package com.career.talentomobile.climeviewer.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
+import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
+import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.presenter.PlaceSearchPresenter;
 import com.career.talentomobile.climeviewer.ui.view.PlaceSearchView;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -20,6 +22,7 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
     private static final String TAG = PlaceSearchFragment.class.getName();
 
     private PlaceSearchPresenter presenter;
+    private OnPlaceUpdatedListener onPlaceUpdatedListenerListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,20 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
     }
 
     @Override
-    public void makeToast(String msg) {
-        Toast.makeText(getActivity(), msg ,Toast.LENGTH_SHORT).show();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            onPlaceUpdatedListenerListener = (OnPlaceUpdatedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnPlaceUpdatedListener");
+        }
+    }
+
+    @Override
+    public void updatePlace(GeoInfo geoInfo) {
+        onPlaceUpdatedListenerListener.onPlaceUpdated(geoInfo);
     }
 }

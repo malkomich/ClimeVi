@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
+import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.presenter.MapFragmentPresenter;
 import com.career.talentomobile.climeviewer.ui.view.MapFragmentView;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -166,4 +167,7 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
         }
     }
 
+    public void updateLocation(GeoInfo geoInfo) {
+        presenter.updateLocation(geoInfo);
+    }
 }

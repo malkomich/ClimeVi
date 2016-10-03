@@ -15,7 +15,6 @@ import java.net.URL;
 /**
  * Created by malkomich on 03/10/2016.
  */
-
 public class GeoInfoGetter {
 
     private static final String BASE_URL ="http://api.geonames.org/searchJSON?maxRows=20&startRow=0&lang=en&" +
