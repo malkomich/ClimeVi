@@ -1,5 +1,7 @@
 package com.career.talentomobile.climeviewer.data.rest;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +15,8 @@ import java.net.URL;
  * Generic REST client to retrieve data from web services.
  */
 public abstract class AbstractGetter {
+
+    private static final String TAG = "GEONAMES SERVICE API";
 
     /**
      * Check if domain objects has been set.
@@ -31,6 +35,8 @@ public abstract class AbstractGetter {
     protected void doRequest(URL url) {
 
         StringBuilder output = new StringBuilder();
+
+        Log.d(TAG, "GET: " + url.toString());
 
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -55,6 +61,8 @@ public abstract class AbstractGetter {
             e.printStackTrace();
 
         }
+
+        Log.d(TAG, "RESPONSE: " + output.toString());
 
         parseOutput(output.toString());
     }
