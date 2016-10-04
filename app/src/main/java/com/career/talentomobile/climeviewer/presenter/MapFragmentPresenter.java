@@ -19,7 +19,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,9 +32,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Locale;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Controller of the map fragment logic.
  */
-
 public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener, LocationListener, ResultCallback<LocationSettingsResult>,
     GoogleMap.OnMyLocationButtonClickListener{
@@ -54,6 +52,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         this.view = view;
     }
 
+    /**
+     * Disable any update on fragment pause.
+     */
     public void onPause() {
         // Stop location updates when Activity is no longer active
         if (mApiClient != null) {
@@ -61,6 +62,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /**
+     * Initialize API map client & enables geolocation.
+     */
     public void initMapsApi() {
         if(view.checkLocationPermission()) {
             if(mApiClient == null) {
@@ -70,11 +74,19 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /**
+     * Sets the API client & proceeds to request a connection.
+     *
+     * @param googleApiClient Client for consuming Google API
+     */
     public void setGoogleApiClient(GoogleApiClient googleApiClient) {
         mApiClient = googleApiClient;
         mApiClient.connect();
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.maps.OnMapReadyCallback#onMapReady()
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady");
@@ -87,6 +99,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         mMap.getUiSettings().setZoomControlsEnabled(false);
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks#onConnected()
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.d(TAG, "onConnected");
@@ -119,18 +134,27 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks#onConnectionSuspended()
+     */
     @Override
     public void onConnectionSuspended(int i) {
         // TODO: Pending
         Log.d(TAG, "onConnectionSuspended");
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener#onConnectionFailed()
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // TODO: Pending
         Log.d(TAG, "onConnectionFailed");
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.location.LocationListener#onLocationChanged()
+     */
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "onLocationChanged");
@@ -156,6 +180,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener#onMyLocationButtonClick()
+     */
     @Override
     public boolean onMyLocationButtonClick() {
         Log.d(TAG, "onMyLocationButtonClick");
@@ -165,6 +192,9 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see com.google.android.gms.common.api.ResultCallback#onResult()
+     */
     @Override
     public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
         Log.d(TAG, "onResult");
@@ -181,6 +211,12 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /**
+     * Focus camera on location requested & draw markers on every weather station belonging to the area delimited by
+     * the place.
+     *
+     * @param geoInfo Geolocation data
+     */
     public void updateLocation(GeoInfo geoInfo) {
         Log.d(TAG, "updateLocation");
 
@@ -201,6 +237,17 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         }
     }
 
+    /**
+     * Build a marker configuration to draw on the map.
+     *
+     * @param coords
+     *               Geolocation of the marker
+     * @param title
+     *               Label to show for the marker
+     * @param icon
+     *              Icon which represent the marker in the map
+     * @return MarkerOptions
+     */
     private MarkerOptions createMarkOptions(LatLng coords, String title, BitmapDescriptor icon) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(coords);

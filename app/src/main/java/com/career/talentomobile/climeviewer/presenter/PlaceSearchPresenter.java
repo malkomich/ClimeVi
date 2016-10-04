@@ -15,7 +15,7 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.gson.Gson;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Controller of the place's search fragment logic.
  */
 public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocationInfoListener {
 
@@ -29,7 +29,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
 
     @Override
     public void onPlaceSelected(Place place) {
-        Log.i(TAG, "Place: " + place.getName());
+        Log.i(TAG, "onPlaceSelected: " + place.getName());
         new FindPlaceTask(this).execute(place);
     }
 
@@ -38,6 +38,9 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
         Log.i(TAG, "An error occurred: " + status);
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.callback.OnGeoLocationInfoListener#onGeoLocationInfo()
+     */
     @Override
     public void onGeoLocationInfo(GeoInfo geoInfo) {
         view.updatePlace(geoInfo);
@@ -47,18 +50,17 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
      * Save place request to the history
      *
      * @param geoInfo
-     * @param mContext
+     *                Geolocation data
+     * @param prefs
+     *              SharedPreferences which contains the places history
      */
-    public void saveRequest(GeoInfo geoInfo, Context mContext) {
-        SharedPreferences prefs = mContext.getSharedPreferences(MainActivity.HISTORY, 0);
+    public void saveRequest(GeoInfo geoInfo, SharedPreferences prefs) {
         Gson gson = new Gson();
-
         int length = prefs.getInt(MainActivity.HISTORY_LENGTH, 0);
 
         String prevJson = prefs.getString(MainActivity.HISTORY_ITEM + "_" + (length - 1), null);
         GeoInfo prevEntry = gson.fromJson(prevJson, GeoInfo.class);
 
-        Log.d(TAG, "saveRequest: " + geoInfo.getPlaceName() + ", PREV: " + prevEntry.getPlaceName());
         if(!prevEntry.getPlaceCoordinates().equals(geoInfo.getPlaceCoordinates())) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);

@@ -14,12 +14,9 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 import java.util.List;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Adapter for history entries shown in the slide listview of the fragment.
  */
-
 public class HistoryAdapter extends ArrayAdapter<GeoInfo> {
-
-    private final String TAG = HistoryAdapter.class.getName();
 
     private final Context context;
     private final int resource;
@@ -30,6 +27,9 @@ public class HistoryAdapter extends ArrayAdapter<GeoInfo> {
         this.context = context;
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#getView()
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {

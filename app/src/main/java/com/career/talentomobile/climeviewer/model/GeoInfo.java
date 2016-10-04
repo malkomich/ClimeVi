@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Data object for the location information of a place.
  */
 public class GeoInfo {
 
+    // API naming of the JSON objects
     private static final String GEO_STATIONS = "geonames";
 
     private final String placeName;
@@ -43,14 +44,29 @@ public class GeoInfo {
         }
     }
 
+    /**
+     * Gets the name of the place, which is retrieved by Google Places API.
+     *
+     * @return PlaceName
+     */
     public String getPlaceName() {
         return placeName;
     }
 
+    /**
+     * Gets the coordinates of the location of the place.
+     *
+     * @return PlaceCoords
+     */
     public Coordinates getPlaceCoordinates() {
         return placeCoords;
     }
 
+    /**
+     * Gets the weather stations belonging this place.
+     *
+     * @return Stations
+     */
     public List<GeoStation> getStations() {
         return stations;
     }

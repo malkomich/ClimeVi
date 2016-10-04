@@ -17,7 +17,7 @@ import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Fragment implementation of the place search section view.
  */
 public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
 
@@ -26,12 +26,18 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
     private PlaceSearchPresenter presenter;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreate()
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new PlaceSearchPresenter(this);
     }
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreateView()
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +57,9 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
         return view;
     }
 
+    /* (non-Javadoc)
+     * @see android.app.Fragment#onAttach()
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -64,9 +73,15 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
         }
     }
 
+    /**
+     * Delegates the place update to update also the involved fragments.
+     *
+     * @param geoInfo
+     *                Geolocation data
+     */
     @Override
     public void updatePlace(GeoInfo geoInfo) {
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
-        presenter.saveRequest(geoInfo, getContext());
+        presenter.saveRequest(geoInfo, onPlaceUpdatedListener.getHistorySharedPreferences());
     }
 }

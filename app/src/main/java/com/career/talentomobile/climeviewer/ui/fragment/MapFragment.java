@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
@@ -27,7 +26,7 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.SupportMapFragment;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Fragment implementation of the map section view.
  */
 public class MapFragment extends Fragment implements MapFragmentView {
 
@@ -42,12 +41,18 @@ public class MapFragment extends Fragment implements MapFragmentView {
      */
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreate()
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new MapFragmentPresenter(this);
     }
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreateView()
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,17 +70,20 @@ public class MapFragment extends Fragment implements MapFragmentView {
         return view;
     }
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onPause()
+     */
     @Override
     public void onPause() {
-        Log.d(TAG, "onPause");
-
         super.onPause();
         presenter.onPause();
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.MapFragmentView#buildGoogleApiClient()
+     */
     @Override
     public synchronized void buildGoogleApiClient() {
-
         Log.d(TAG, "buildGoogleApiClient");
 
         GoogleApiClient apiClient = new GoogleApiClient.Builder(getActivity())
@@ -89,9 +97,11 @@ public class MapFragment extends Fragment implements MapFragmentView {
         presenter.setGoogleApiClient(apiClient);
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.MapFragmentView#checkLocationPermission()
+     */
     @Override
     public boolean checkLocationPermission(){
-
         Log.d(TAG, "checkLocationPermission");
 
         if (ContextCompat.checkSelfPermission(getActivity(),
@@ -125,6 +135,9 @@ public class MapFragment extends Fragment implements MapFragmentView {
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.MapFragmentView#showLocationDialog()
+     */
     @Override
     public void showLocationDialog(Status status) {
         try {
@@ -134,30 +147,9 @@ public class MapFragment extends Fragment implements MapFragmentView {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-        @NonNull String permissions[], @NonNull int[] grantResults) {
-
-        Log.d(TAG, "onRequestPermissionsResult");
-
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    presenter.initMapsApi();
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }
-
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.MapFragmentView#updateLocation()
+     */
     @Override
     public void updateLocation(GeoInfo geoInfo) {
         presenter.updateLocation(geoInfo);

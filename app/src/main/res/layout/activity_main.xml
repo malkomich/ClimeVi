@@ -23,7 +23,7 @@
         android:id="@+id/temp_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment"/>
+        android:name="com.career.talentomobile.climeviewer.ui.fragment.WeatherFragment"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

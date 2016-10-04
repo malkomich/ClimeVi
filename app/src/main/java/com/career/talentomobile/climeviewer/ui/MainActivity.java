@@ -1,9 +1,9 @@
 package com.career.talentomobile.climeviewer.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.career.talentomobile.climeviewer.R;
@@ -11,10 +11,10 @@ import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.ui.view.HistoryView;
 import com.career.talentomobile.climeviewer.ui.view.MapFragmentView;
-import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
+import com.career.talentomobile.climeviewer.ui.view.WeatherView;
 
 /**
- * Created by malkomich on 01/10/2016.
+ * Main activity, composed with fragments, which launch the application functionality.
  */
 public class MainActivity extends FragmentActivity implements OnPlaceUpdatedListener, View.OnClickListener {
 
@@ -24,11 +24,11 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
     public static final String HISTORY_LENGTH = "history_length";
     public static final String HISTORY_ITEM = "history_item";
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onCreate()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -36,6 +36,9 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         fab.setOnClickListener(this);
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener#onPlaceUpdated()
+     */
     @Override
     public void onPlaceUpdated(GeoInfo geoInfo) {
         // Center on new location and show station marks
@@ -43,11 +46,22 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         mapFragmentView.updateLocation(geoInfo);
 
         // Show weather info fragment
-        TemperatureView temperatureView = (TemperatureView) getSupportFragmentManager()
+        WeatherView weatherView = (WeatherView) getSupportFragmentManager()
             .findFragmentById(R.id.temp_fragment);
-        temperatureView.updateWeather(geoInfo.getAreaPoints());
+        weatherView.updateWeather(geoInfo.getAreaPoints());
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener#getHistorySharedPreferences()
+     */
+    @Override
+    public SharedPreferences getHistorySharedPreferences() {
+        return getSharedPreferences(HISTORY, 0);
+    }
+
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick()
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

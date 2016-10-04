@@ -5,10 +5,10 @@ import org.json.JSONObject;
 /**
  * Points of a station's geolocation which indicates north, south, east and west position values.
  *
- * @author malkomich
- *
  */
 public class GeoPoints {
+
+    // API naming of the JSON objects
     private static final String NORTH = "north";
     private static final String SOUTH = "south";
     private static final String EAST = "east";

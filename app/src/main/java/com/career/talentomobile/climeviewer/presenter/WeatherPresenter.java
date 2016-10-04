@@ -6,27 +6,32 @@ import com.career.talentomobile.climeviewer.tasks.GetClimeTask;
 import com.career.talentomobile.climeviewer.callback.OnWeatherInfoListener;
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;
-import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
+import com.career.talentomobile.climeviewer.ui.view.WeatherView;
 
 /**
- * Created by malkomich on 04/10/2016.
+ * Controller of the weather fragment logic.
  */
+public class WeatherPresenter implements OnWeatherInfoListener {
 
-public class TemperaturePresenter implements OnWeatherInfoListener {
+    private final WeatherView view;
 
-    private static final String TAG = TemperaturePresenter.class.getName();
-
-    private final TemperatureView view;
-
-    public TemperaturePresenter(TemperatureView view) {
+    public WeatherPresenter(WeatherView view) {
         this.view = view;
     }
 
+    /**
+     * Runs the task to get the weather data for a specific area.
+     *
+     * @param area
+     *             Points which delimited the requested area
+     */
     public void updateWeather(GeoPoints area) {
-        Log.d(TAG, "updateWeather");
         new GetClimeTask(this).execute(area);
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.callback.OnWeatherInfoListener#onWeatherInfo()
+     */
     @Override
     public void onWeatherInfo(WeatherInfo weatherInfo) {
         if(weatherInfo.getTemperature() != null) {

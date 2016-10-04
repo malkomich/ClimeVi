@@ -14,27 +14,33 @@ import android.widget.TextView;
 import com.career.talentomobile.climeviewer.R;
 import com.career.talentomobile.climeviewer.util.MathUtils;
 import com.career.talentomobile.climeviewer.model.GeoPoints;
-import com.career.talentomobile.climeviewer.presenter.TemperaturePresenter;
-import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
+import com.career.talentomobile.climeviewer.presenter.WeatherPresenter;
+import com.career.talentomobile.climeviewer.ui.view.WeatherView;
 
 /**
- * Created by malkomich on 04/10/2016.
+ * Fragment implementation of the weather section view.
  */
-public class TemperatureFragment extends Fragment implements TemperatureView {
+public class WeatherFragment extends Fragment implements WeatherView {
 
-    private static final String TAG = TemperatureFragment.class.getName();
+    private static final String TAG = WeatherFragment.class.getName();
 
-    private TemperaturePresenter presenter;
+    private WeatherPresenter presenter;
     private LinearLayout temperatureLayout;
     private ProgressBar temperatureBar;
     private TextView temperatureText;
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreate()
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new TemperaturePresenter(this);
+        presenter = new WeatherPresenter(this);
     }
 
+    /* (non-Javadoc)
+     * @see android.support.v4.app.Fragment#onCreateView()
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,11 +53,17 @@ public class TemperatureFragment extends Fragment implements TemperatureView {
         return view;
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.WeatherView#updateWeather()
+     */
     @Override
     public void updateWeather(GeoPoints area) {
         presenter.updateWeather(area);
     }
 
+    /* (non-Javadoc)
+     * @see com.career.talentomobile.climeviewer.ui.view.WeatherView#setTemperature()
+     */
     @Override
     public void setTemperature(double temperature) {
         Log.d(TAG, "setTemperature: " + temperature);

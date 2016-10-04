@@ -1,7 +1,6 @@
 package com.career.talentomobile.climeviewer.tasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.career.talentomobile.climeviewer.callback.OnGeoLocationInfoListener;
 import com.career.talentomobile.climeviewer.data.rest.GeoInfoGetter;
@@ -9,11 +8,9 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.location.places.Place;
 
 /**
- * Created by malkomich on 02/10/2016.
+ * Asynchronous task to retrieve the geolocation data of a place.
  */
 public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
-
-    private static final String TAG = FindPlaceTask.class.getName();
 
     private final OnGeoLocationInfoListener listener;
 
@@ -22,6 +19,9 @@ public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
         this.listener = listener;
     }
 
+    /* (non-Javadoc)
+     * @see android.os.AsyncTask#doInBackground()
+     */
     @Override
     protected GeoInfo doInBackground(Place... params) {
         Place place = params[0];
@@ -32,10 +32,11 @@ public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see android.os.AsyncTask#onPostExecute()
+     */
     @Override
     protected void onPostExecute(GeoInfo geoInfo) {
-        Log.d(TAG + ":onPostExecute", "RESPONSE: " + geoInfo);
-
         if(geoInfo != null) {
             listener.onGeoLocationInfo(geoInfo);
         }

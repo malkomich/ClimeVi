@@ -7,10 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by malkomich on 04/10/2016.
+ * Data object for the weather information in a specific place.
  */
 public class WeatherInfo {
 
+    // API naming of the JSON objects
     private static final String OBSERVATIONS = "weatherObservations";
     private static final String TEMPERATURE = "temperature";
 
@@ -32,6 +33,11 @@ public class WeatherInfo {
         }
     }
 
+    /**
+     * Gets the average of the current temperature.
+     *
+     * @return temp
+     */
     public Double getTemperature() {
         return temp;
     }

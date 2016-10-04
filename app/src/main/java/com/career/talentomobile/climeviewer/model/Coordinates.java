@@ -1,7 +1,7 @@
 package com.career.talentomobile.climeviewer.model;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Geo Location of a place which wraps the latitude and longitude values.
  */
 public class Coordinates {
 
@@ -31,6 +31,9 @@ public class Coordinates {
         return longitude;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals()
+     */
     @Override
     public boolean equals(Object object) {
         return object instanceof Coordinates &&
@@ -40,8 +43,10 @@ public class Coordinates {
 
     /**
      * Check if the current coordinates are near to the given coordinates.
+     *
      * @param coords
-     * @return
+     *               Geo location of a second place
+     * @return boolean
      */
     public boolean isNear(Coordinates coords) {
         boolean latitudeValid = Math.abs(Math.abs(latitude) - Math.abs(coords.latitude)) <= 3;

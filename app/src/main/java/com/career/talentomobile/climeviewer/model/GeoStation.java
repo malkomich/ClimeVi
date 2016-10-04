@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * Weather station model.
  */
 public class GeoStation {
 
+    // API naming of the JSON objects
     private static final String BBOX = "bbox";
     private static final String LAT = "lat";
     private static final String LON = "lng";
@@ -57,14 +58,14 @@ public class GeoStation {
     /**
      * Checks if the geo station has the required field values.
      *
-     * @return
+     * @return boolean
      */
     public boolean isValid() {
         return coordinates != null;
     }
 
     /**
-     * Gets the geo points of the station
+     * Gets the geo points of the area covered by the station
      *
      * @return geoPoints
      */
@@ -73,7 +74,7 @@ public class GeoStation {
     }
 
     /**
-     * Gets the coordinates of the station
+     * Gets the exact coordinates of the station
      *
      * @return coordinates
      */
@@ -83,6 +84,8 @@ public class GeoStation {
 
     /**
      * Gets the name of the station in a given language.
+     *
+     * @return String
      */
     public String getName(String lang) {
         return names.containsKey(lang) ? names.get(lang) : preferredName;

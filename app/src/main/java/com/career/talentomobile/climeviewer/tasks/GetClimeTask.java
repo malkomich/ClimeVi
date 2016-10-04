@@ -9,11 +9,9 @@ import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;
 
 /**
- * Created by malkomich on 04/10/2016.
+ * Asynchronous task to retrieve the weather data of a place.
  */
 public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
-
-    private static final String TAG = GetClimeTask.class.getName();
 
     private final OnWeatherInfoListener listener;
 
@@ -22,6 +20,9 @@ public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
         this.listener = listener;
     }
 
+    /* (non-Javadoc)
+     * @see android.os.AsyncTask#doInBackground()
+     */
     @Override
     protected WeatherInfo doInBackground(GeoPoints... geoPoints) {
         GeoPoints area = geoPoints[0];
@@ -32,10 +33,11 @@ public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see android.os.AsyncTask#onPostExecute()
+     */
     @Override
     protected void onPostExecute(WeatherInfo weatherInfo) {
-        Log.d(TAG + ":onPostExecute", "RESPONSE: " + weatherInfo);
-
         if(weatherInfo != null) {
             listener.onWeatherInfo(weatherInfo);
         }

@@ -5,9 +5,8 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 import java.util.List;
 
 /**
- * Created by malkomich on 03/10/2016.
+ * View logic definition for the history section.
  */
-
 public interface HistoryView {
 
     void setItems(List<GeoInfo> items);
@@ -16,7 +15,13 @@ public interface HistoryView {
 
     void updatePlace(GeoInfo geoInfo);
 
+    /**
+     * Show the history view.
+     */
     void show();
 
+    /**
+     * Hide the history view.
+     */
     void hide();
 }

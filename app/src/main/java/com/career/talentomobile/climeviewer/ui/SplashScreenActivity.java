@@ -11,13 +11,16 @@ import android.widget.LinearLayout;
 import com.career.talentomobile.climeviewer.R;
 
 /**
- * Created by malkomich on 01/10/2016.
+ * Activity which controls the splash screen shown the first time the application is opened.
  */
 public class SplashScreenActivity extends Activity {
 
     /** Splash millis duration **/
     private final static int SPLASH_DISPLAY_LENGTH = 2000;
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate()
+     */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
