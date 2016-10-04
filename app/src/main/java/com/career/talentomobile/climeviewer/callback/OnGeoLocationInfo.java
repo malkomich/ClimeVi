@@ -1,5 +1,7 @@
 package com.career.talentomobile.climeviewer.callback;
 
+import android.location.Geocoder;
+
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 
 /**
@@ -9,4 +11,5 @@ import com.career.talentomobile.climeviewer.model.GeoInfo;
 public interface OnGeoLocationInfo {
 
     void onGeoLocationInfo(GeoInfo geoInfo);
+
 }

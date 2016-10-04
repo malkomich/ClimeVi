@@ -1,8 +1,10 @@
 package com.career.talentomobile.climeviewer.ui.fragment;
 
 import android.content.Context;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.presenter.PlaceSearchPresenter;
 import com.career.talentomobile.climeviewer.ui.view.PlaceSearchView;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+
+import java.util.Locale;
 
 /**
  * Created by malkomich on 03/10/2016.
@@ -38,6 +43,12 @@ public class PlaceSearchFragment extends BaseFragment implements PlaceSearchView
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
             getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete);
+
+        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+            .build();
+        autocompleteFragment.setFilter(typeFilter);
+
         autocompleteFragment.setOnPlaceSelectedListener(presenter);
 
         return view;

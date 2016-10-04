@@ -2,6 +2,7 @@ package com.career.talentomobile.climeviewer.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Geocoder;
 import android.util.Log;
 
 import com.career.talentomobile.climeviewer.FindPlaceTask;
@@ -13,6 +14,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 /**
  * Created by malkomich on 03/10/2016.

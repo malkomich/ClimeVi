@@ -1,5 +1,7 @@
 package com.career.talentomobile.climeviewer;
 
+import android.location.Geocoder;
+
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.location.places.Place;
 

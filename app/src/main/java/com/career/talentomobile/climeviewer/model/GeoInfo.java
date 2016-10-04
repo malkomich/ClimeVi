@@ -1,5 +1,7 @@
 package com.career.talentomobile.climeviewer.model;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 
 import com.google.android.gms.location.places.Place;
@@ -8,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +21,7 @@ import java.util.Locale;
 public class GeoInfo {
 
     private static final String GEO_STATIONS = "geonames";
+    private static final String COUNTRY_CODE = "countryCode";
 
     private String placeName;
     private List<GeoStation> stations;
@@ -35,7 +39,7 @@ public class GeoInfo {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 
                 GeoStation geoStation = new GeoStation(jsonItem);
-                if(jsonItem.has(GeoStation.BBOX)) {
+                if(geoStation.isValid() && geoStation.getCoordinates().isNear(placeCoords)) {
                     stations.add(geoStation);
                 }
             }

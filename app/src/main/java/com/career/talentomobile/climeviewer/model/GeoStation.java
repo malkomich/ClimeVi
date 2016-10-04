@@ -13,8 +13,9 @@ import java.util.Map;
 public class GeoStation {
 
     public static final String BBOX = "bbox";
-    private static final String LAT = "lat";
-    private static final String LON = "lng";
+    public static final String LAT = "lat";
+    public static final String LON = "lng";
+
     private static final String I18N_NAMES = "alternateNames";
     private static final String NAME_NAME = "name";
     private static final String NAME_LANG = "lang";
@@ -30,19 +31,12 @@ public class GeoStation {
         Double latitude = null;
         Double longitude = null;
 
-        if (json.has(BBOX)) {
-            geoPoints = new GeoPoints(json.optJSONObject(BBOX));
-        }
-        if (json.has(LAT)) {
-            latitude = json.optDouble(LAT);
-        }
-        if (json.has(LON)) {
-            longitude = json.optDouble(LON);
-        }
-        if(latitude != null && longitude != null) {
-            coordinates = new Coordinates(latitude, longitude);
-        }
-        if (json.has(I18N_NAMES)) {
+        geoPoints = (json.has(BBOX)) ? new GeoPoints(json.optJSONObject(BBOX)) : null;
+        latitude = json.optDouble(LAT);
+        longitude = json.optDouble(LON);
+        coordinates = (latitude != null && longitude != null) ? new Coordinates(latitude, longitude) : null;
+
+        if(json.has(I18N_NAMES)) {
             JSONArray namesJSONArray = json.optJSONArray(I18N_NAMES);
             try {
                 for (int i = 0; i < namesJSONArray.length(); i++) {
@@ -51,7 +45,7 @@ public class GeoStation {
                     String name = jsonName.optString(NAME_NAME);
                     boolean preferred = jsonName.optBoolean(NAME_PREFERRED, false);
                     names.put(jsonName.optString(NAME_LANG), name);
-                    if(preferred) {
+                    if (preferred) {
                         preferredName = name;
                     }
                 }
@@ -59,6 +53,15 @@ public class GeoStation {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Checks if the geo station has the required field values.
+     *
+     * @return
+     */
+    public boolean isValid() {
+        return (geoPoints != null && coordinates != null);
     }
 
     /**

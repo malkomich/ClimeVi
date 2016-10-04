@@ -2,6 +2,7 @@ package com.career.talentomobile.climeviewer.model;
 
 import android.util.Log;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -43,5 +44,16 @@ public class Coordinates {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Check if the current coordinates are near to the given coordinates.
+     * @param coords
+     * @return
+     */
+    public boolean isNear(Coordinates coords) {
+        boolean latitudeValid = Math.abs(Math.abs(latitude) - Math.abs(coords.latitude)) <= 3;
+        boolean longitudeValid = Math.abs(Math.abs(longitude) - Math.abs(coords.longitude)) <= 3;
+        return latitudeValid && longitudeValid;
     }
 }
