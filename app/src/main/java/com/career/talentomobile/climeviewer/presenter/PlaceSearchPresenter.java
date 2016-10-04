@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.career.talentomobile.climeviewer.FindPlaceTask;
+import com.career.talentomobile.climeviewer.tasks.FindPlaceTask;
 import com.career.talentomobile.climeviewer.callback.OnGeoLocationInfoListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.ui.MainActivity;

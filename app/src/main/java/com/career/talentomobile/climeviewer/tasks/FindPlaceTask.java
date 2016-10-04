@@ -1,9 +1,10 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.career.talentomobile.climeviewer.callback.OnGeoLocationInfoListener;
+import com.career.talentomobile.climeviewer.data.rest.GeoInfoGetter;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.location.places.Place;
 

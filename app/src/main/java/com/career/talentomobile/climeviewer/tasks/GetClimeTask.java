@@ -1,9 +1,10 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.career.talentomobile.climeviewer.callback.OnWeatherInfoListener;
+import com.career.talentomobile.climeviewer.data.rest.WeatherInfoGetter;
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;
 

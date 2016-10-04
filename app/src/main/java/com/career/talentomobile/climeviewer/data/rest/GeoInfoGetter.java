@@ -1,9 +1,9 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.data.rest;
 
-import android.util.Log;
+import android.location.Geocoder;
 
-import com.career.talentomobile.climeviewer.model.GeoPoints;
-import com.career.talentomobile.climeviewer.model.WeatherInfo;
+import com.career.talentomobile.climeviewer.model.GeoInfo;
+import com.google.android.gms.location.places.Place;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,39 +16,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by malkomich on 04/10/2016.
+ * Created by malkomich on 03/10/2016.
  */
-public class WeatherInfoGetter {
+public class GeoInfoGetter {
 
-    private static final String TAG = WeatherInfoGetter.class.getName();
-    private static final String BASE_URL ="http://api.geonames.org/weatherJSON?username=ilgeonamessample";
+    private static final String BASE_URL ="http://api.geonames.org/searchJSON?maxRows=20&startRow=0&lang=en&" +
+        "isNameRequired=true&style=FULL&username=ilgeonamessample";
 
-    private WeatherInfo weatherInfo;
+    private GeoInfo geoInfo;
 
-    public WeatherInfoGetter(GeoPoints area) {
-        URL url = buildURL(area);
+    public GeoInfoGetter(Place place) {
+        URL url = buildURL(place.getName().toString());
         if(url != null) {
-            doRequest(url);
+            doRequest(url, place);
         }
     }
 
     public boolean apiSuccess() {
-        return weatherInfo != null;
+        return (geoInfo != null) ? true : false;
     }
 
-    public WeatherInfo getWeatherInfo() {
-        return weatherInfo;
+    public GeoInfo getGeoInfo() {
+        return geoInfo;
     }
 
-    protected URL buildURL(GeoPoints area) {
-        StringBuilder builder = new StringBuilder().append(BASE_URL)
-            .append("&north=").append(area.getNorth())
-            .append("&south=").append(area.getSouth())
-            .append("&east=").append(area.getEast())
-            .append("&west=").append(area.getWest());
-        Log.d(TAG, "URL: " + builder.toString());
+    private URL buildURL(String place) {
+        String path = BASE_URL + "&q=" + place;
         try {
-            return new URL(builder.toString());
+            return new URL(path);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -62,11 +57,12 @@ public class WeatherInfoGetter {
      * @param url
      *            Service URL
      */
-    private void doRequest(URL url) {
+    private void doRequest(URL url, Place place) {
 
         StringBuilder output = new StringBuilder();
 
         try {
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
@@ -90,7 +86,7 @@ public class WeatherInfoGetter {
 
         }
 
-        parseOutput(output.toString());
+        parseOutput(output.toString(), place);
     }
 
     /**
@@ -100,7 +96,7 @@ public class WeatherInfoGetter {
      * @param output
      *            Service Data result
      */
-    private void parseOutput(String output) {
+    private void parseOutput(String output, Place place) {
 
         JSONObject json = null;
         try {
@@ -110,11 +106,11 @@ public class WeatherInfoGetter {
         }
 
         if(json != null) {
-            init(json);
+            init(json, place);
         }
     }
 
-    private void init(JSONObject json) {
-        weatherInfo = new WeatherInfo(json);
+    private void init(JSONObject json, Place place) {
+        geoInfo = new GeoInfo(json, place);
     }
 }

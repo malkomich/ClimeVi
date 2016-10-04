@@ -1,11 +1,11 @@
-package com.career.talentomobile.climeviewer;
+package com.career.talentomobile.climeviewer.util;
 
 import java.math.BigDecimal;
 
 /**
  * Created by malkomich on 04/10/2016.
  */
-public class Util {
+public class MathUtils {
 
     public static double celsiusToFahrenheit(double celsius) {
         return new BigDecimal(celsius * 9 / 5.0 + 32)

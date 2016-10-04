@@ -2,7 +2,7 @@ package com.career.talentomobile.climeviewer.presenter;
 
 import android.util.Log;
 
-import com.career.talentomobile.climeviewer.GetClimeTask;
+import com.career.talentomobile.climeviewer.tasks.GetClimeTask;
 import com.career.talentomobile.climeviewer.callback.OnWeatherInfoListener;
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;

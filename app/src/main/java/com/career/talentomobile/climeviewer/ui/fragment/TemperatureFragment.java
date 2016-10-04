@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.career.talentomobile.climeviewer.R;
-import com.career.talentomobile.climeviewer.Util;
+import com.career.talentomobile.climeviewer.util.MathUtils;
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.presenter.TemperaturePresenter;
 import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
@@ -56,7 +56,7 @@ public class TemperatureFragment extends BaseFragment implements TemperatureView
     public void setTemperature(double temperature) {
         Log.d(TAG, "setTemperature: " + temperature);
 
-        temperatureBar.setProgress((int) Util.celsiusToFahrenheit(temperature));
+        temperatureBar.setProgress((int) MathUtils.celsiusToFahrenheit(temperature));
         temperatureText.setText(String.valueOf(temperature));
         temperatureLayout.setVisibility(View.VISIBLE);
     }
