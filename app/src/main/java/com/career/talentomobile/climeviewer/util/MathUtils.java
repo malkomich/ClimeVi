@@ -8,8 +8,12 @@ import java.math.BigDecimal;
 public class MathUtils {
 
     public static double celsiusToFahrenheit(double celsius) {
-        return new BigDecimal(celsius * 9 / 5.0 + 32)
-            .setScale(1, BigDecimal.ROUND_HALF_EVEN)
+        return celsius * 9 / 5.0 + 32;
+    }
+
+    public static double roundDouble(double number, int precision) {
+        return new BigDecimal(number)
+            .setScale(precision, BigDecimal.ROUND_HALF_EVEN)
             .doubleValue();
     }
 }

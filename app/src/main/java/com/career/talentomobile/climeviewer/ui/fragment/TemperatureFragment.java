@@ -57,7 +57,7 @@ public class TemperatureFragment extends Fragment implements TemperatureView {
         Log.d(TAG, "setTemperature: " + temperature);
 
         temperatureBar.setProgress((int) MathUtils.celsiusToFahrenheit(temperature));
-        temperatureText.setText(String.valueOf(temperature));
+        temperatureText.setText(String.valueOf(MathUtils.roundDouble(temperature, 1)));
         temperatureLayout.setVisibility(View.VISIBLE);
     }
 }
