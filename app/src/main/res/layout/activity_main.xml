@@ -34,4 +34,10 @@
         android:layout_height="match_parent"
         android:name="com.career.talentomobile.climeviewer.ui.fragment.HistoryFragment"/>
 
+    <fragment
+        android:id="@+id/temp_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment"/>
+
 </FrameLayout>

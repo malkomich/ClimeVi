@@ -10,7 +10,6 @@ import com.career.talentomobile.climeviewer.model.WeatherInfo;
 /**
  * Created by malkomich on 04/10/2016.
  */
-
 public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
 
     private static final String TAG = GetClimeTask.class.getName();

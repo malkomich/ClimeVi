@@ -1,5 +1,7 @@
 package com.career.talentomobile.climeviewer;
 
+import android.util.Log;
+
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;
 
@@ -16,10 +18,10 @@ import java.net.URL;
 /**
  * Created by malkomich on 04/10/2016.
  */
-
 public class WeatherInfoGetter {
 
-    private static final String BASE_URL ="http://api.geonames.org/weatherJSON";
+    private static final String TAG = WeatherInfoGetter.class.getName();
+    private static final String BASE_URL ="http://api.geonames.org/weatherJSON?username=ilgeonamessample";
 
     private WeatherInfo weatherInfo;
 
@@ -40,10 +42,11 @@ public class WeatherInfoGetter {
 
     protected URL buildURL(GeoPoints area) {
         StringBuilder builder = new StringBuilder().append(BASE_URL)
-            .append("?north=").append(area.getNorth())
+            .append("&north=").append(area.getNorth())
             .append("&south=").append(area.getSouth())
             .append("&east=").append(area.getEast())
             .append("&west=").append(area.getWest());
+        Log.d(TAG, "URL: " + builder.toString());
         try {
             return new URL(builder.toString());
         } catch (MalformedURLException e) {

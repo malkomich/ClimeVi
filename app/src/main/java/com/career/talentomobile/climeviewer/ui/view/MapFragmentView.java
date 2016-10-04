@@ -1,5 +1,6 @@
 package com.career.talentomobile.climeviewer.ui.view;
 
+import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.common.api.Status;
 
 /**
@@ -13,4 +14,6 @@ public interface MapFragmentView extends BaseView {
     void showLocationDialog(Status status);
 
     void buildGoogleApiClient();
+
+    void updateLocation(GeoInfo geoInfo);
 }

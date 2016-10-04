@@ -9,13 +9,12 @@ import org.json.JSONObject;
 /**
  * Created by malkomich on 04/10/2016.
  */
-
 public class WeatherInfo {
 
     private static final String OBSERVATIONS = "weatherObservations";
     private static final String TEMPERATURE = "temperature";
 
-    private Double temp;
+    private double temp;
 
     public WeatherInfo(JSONObject json) {
         try {
@@ -24,11 +23,9 @@ public class WeatherInfo {
             for (i = 0; i < stationJSONArray.length(); i++) {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 
-                Log.d("WeatherInfo", "ITERATION " + i);
                 temp += jsonItem.optDouble(TEMPERATURE);
             }
             temp /= i;
-            Log.d("WeatherInfo", "TOTAL: " + i);
             Log.d("WeatherInfo", "Temperature: " + temp);
         } catch (JSONException e) {
             e.printStackTrace();

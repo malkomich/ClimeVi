@@ -14,7 +14,11 @@ import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.career.talentomobile.climeviewer.ui.fragment.HistoryFragment;
 import com.career.talentomobile.climeviewer.ui.fragment.MapFragment;
+import com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment;
 import com.career.talentomobile.climeviewer.ui.view.HistoryView;
+import com.career.talentomobile.climeviewer.ui.view.MapFragmentView;
+import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
+import com.google.android.gms.maps.MapView;
 
 /**
  * Created by malkomich on 01/10/2016.
@@ -41,8 +45,14 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
 
     @Override
     public void onPlaceUpdated(GeoInfo geoInfo) {
-        MapFragment mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
-        mapFragment.updateLocation(geoInfo);
+        // Center on new location and show station marks
+        MapFragmentView mapFragmentView = (MapFragmentView) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+        mapFragmentView.updateLocation(geoInfo);
+
+        // Show weather info fragment
+        TemperatureView temperatureView = (TemperatureView) getSupportFragmentManager()
+            .findFragmentById(R.id.temp_fragment);
+        temperatureView.updateWeather(geoInfo.getAreaPoints());
     }
 
     @Override

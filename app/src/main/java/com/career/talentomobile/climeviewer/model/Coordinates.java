@@ -8,7 +8,6 @@ import java.util.Objects;
 /**
  * Created by malkomich on 03/10/2016.
  */
-
 public class Coordinates {
 
     private double latitude;

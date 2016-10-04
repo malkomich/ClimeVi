@@ -84,6 +84,7 @@ public class GeoInfo {
                 east = (stationsCoords.getLongitude() > east) ? stationsCoords.getLongitude() : east;
                 west = (stationsCoords.getLongitude() < west) ? stationsCoords.getLongitude() : west;
             }
+            Log.d("GeoInfo", "EAST: " + east + ", WEST:" + west);
         }
         return new GeoPoints(north, south, east, west);
     }

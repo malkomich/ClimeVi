@@ -167,6 +167,7 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
         }
     }
 
+    @Override
     public void updateLocation(GeoInfo geoInfo) {
         presenter.updateLocation(geoInfo);
     }
