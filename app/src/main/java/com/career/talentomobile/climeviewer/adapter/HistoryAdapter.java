@@ -1,6 +1,7 @@
 package com.career.talentomobile.climeviewer.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by malkomich on 03/10/2016.
  */
 
-public class HistoryAdapter extends ArrayAdapter {
+public class HistoryAdapter extends ArrayAdapter<GeoInfo> {
 
     private final String TAG = HistoryAdapter.class.getName();
 
@@ -29,8 +30,9 @@ public class HistoryAdapter extends ArrayAdapter {
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -43,7 +43,8 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     private static final String TAG = MapFragmentPresenter.class.getName();
     private static final float DEFAULT_ZOOM = 9.0f;
 
-    private MapFragmentView view;
+    private final MapFragmentView view;
+
     private GoogleMap mMap;
     private GoogleApiClient mApiClient;
     private Location mLastLocation;
@@ -169,22 +170,13 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         Log.d(TAG, "onResult");
 
         final Status status = locationSettingsResult.getStatus();
-        final LocationSettingsStates state = locationSettingsResult.getLocationSettingsStates();
         switch (status.getStatusCode()) {
-            case LocationSettingsStatusCodes.SUCCESS:
-                // All location settings are satisfied. The client can initialize location
-                // requests here.
-                break;
             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                 // Location settings are not satisfied. But could be fixed by showing the user
                 // a dialog.
                 // Show the dialog by calling startResolutionForResult(),
                 // and check the result in onActivityResult().
                 view.showLocationDialog(status);
-                break;
-            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                // Location settings are not satisfied. However, we have no way to fix the
-                // settings so we won't show the dialog.
                 break;
         }
     }

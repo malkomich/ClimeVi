@@ -1,24 +1,17 @@
 package com.career.talentomobile.climeviewer.ui;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.career.talentomobile.climeviewer.R;
 import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
-import com.career.talentomobile.climeviewer.ui.fragment.HistoryFragment;
-import com.career.talentomobile.climeviewer.ui.fragment.MapFragment;
-import com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment;
 import com.career.talentomobile.climeviewer.ui.view.HistoryView;
 import com.career.talentomobile.climeviewer.ui.view.MapFragmentView;
 import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
-import com.google.android.gms.maps.MapView;
 
 /**
  * Created by malkomich on 01/10/2016.

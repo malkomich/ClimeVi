@@ -19,7 +19,7 @@ public class WeatherInfo {
     public WeatherInfo(JSONObject json) {
         try {
             JSONArray stationJSONArray = json.getJSONArray(OBSERVATIONS);
-            int i = 0;
+            int i;
             for (i = 0; i < stationJSONArray.length(); i++) {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 

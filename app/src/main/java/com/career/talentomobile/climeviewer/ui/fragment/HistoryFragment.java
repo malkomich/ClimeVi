@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * Created by malkomich on 03/10/2016.
  */
-
 public class HistoryFragment extends ListFragment implements HistoryView {
 
     private static final String TAG = HistoryFragment.class.getName();
@@ -94,10 +93,6 @@ public class HistoryFragment extends ListFragment implements HistoryView {
         Animation bottomHalf = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_half);
         getListView().setAnimation(bottomHalf);
         hiddenPanel.setVisibility(View.VISIBLE);
-    }
-
-    public boolean isShown() {
-        return fragmentShown;
     }
 
     @Override

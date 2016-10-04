@@ -21,7 +21,7 @@ public class HistoryPresenter implements View.OnTouchListener {
 
     private static final String TAG = HistoryPresenter.class.getName();
 
-    private HistoryView view;
+    private final HistoryView view;
 
     public HistoryPresenter(HistoryView view) {
         this.view = view;

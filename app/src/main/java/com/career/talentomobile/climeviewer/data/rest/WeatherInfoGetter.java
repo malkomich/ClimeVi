@@ -40,7 +40,7 @@ public class WeatherInfoGetter {
         return weatherInfo;
     }
 
-    protected URL buildURL(GeoPoints area) {
+    private URL buildURL(GeoPoints area) {
         StringBuilder builder = new StringBuilder().append(BASE_URL)
             .append("&north=").append(area.getNorth())
             .append("&south=").append(area.getSouth())

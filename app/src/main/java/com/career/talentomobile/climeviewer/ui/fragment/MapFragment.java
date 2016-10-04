@@ -3,15 +3,17 @@ package com.career.talentomobile.climeviewer.ui.fragment;
 import android.Manifest;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
@@ -27,12 +29,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 /**
  * Created by malkomich on 03/10/2016.
  */
-public class MapFragment extends BaseFragment implements MapFragmentView {
+public class MapFragment extends Fragment implements MapFragmentView {
 
     private static final String TAG = MapFragment.class.getName();
 
     private MapFragmentPresenter presenter;
-    private View mapView;
 
     /**
      * Request code for location permission request.
@@ -40,12 +41,6 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
      * @see #onRequestPermissionsResult(int, String[], int[])
      */
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-
-    /**
-     * Flag indicating whether a requested permission has been denied after returning in
-     * {@link #onRequestPermissionsResult(int, String[], int[])}.
-     */
-    private boolean mPermissionDenied = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +54,12 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
 
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            checkLocationPermission();
-//        }
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkLocationPermission();
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapView = mapFragment.getView();
         mapFragment.getMapAsync(presenter);
 
         return view;
@@ -90,7 +84,6 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
             .addApi(LocationServices.API)
             .addApi(Places.GEO_DATA_API)
             .addApi(Places.PLACE_DETECTION_API)
-            .enableAutoManage(getActivity(), presenter)
             .build();
 
         presenter.setGoogleApiClient(apiClient);
@@ -99,7 +92,7 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
     @Override
     public boolean checkLocationPermission(){
 
-        Log.d(TAG, "onRequestPermissionsResult");
+        Log.d(TAG, "checkLocationPermission");
 
         if (ContextCompat.checkSelfPermission(getActivity(),
             Manifest.permission.ACCESS_FINE_LOCATION)
@@ -119,7 +112,6 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
                 ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
-
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -144,7 +136,7 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-        String permissions[], int[] grantResults) {
+        @NonNull String permissions[], @NonNull int[] grantResults) {
 
         Log.d(TAG, "onRequestPermissionsResult");
 
@@ -162,7 +154,6 @@ public class MapFragment extends BaseFragment implements MapFragmentView {
                     // functionality that depends on this permission.
                     Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
                 }
-                return;
             }
         }
     }

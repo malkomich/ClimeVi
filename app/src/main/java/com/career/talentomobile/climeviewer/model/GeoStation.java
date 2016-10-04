@@ -12,24 +12,23 @@ import java.util.Map;
  */
 public class GeoStation {
 
-    public static final String BBOX = "bbox";
-    public static final String LAT = "lat";
-    public static final String LON = "lng";
-
+    private static final String BBOX = "bbox";
+    private static final String LAT = "lat";
+    private static final String LON = "lng";
     private static final String I18N_NAMES = "alternateNames";
     private static final String NAME_NAME = "name";
     private static final String NAME_LANG = "lang";
     private static final String NAME_PREFERRED = "isPreferredName";
 
-    private GeoPoints geoPoints;
-    private Coordinates coordinates;
-    private Map<String, String> names = new HashMap<>();
+    private final GeoPoints geoPoints;
+    private final Coordinates coordinates;
+    private final Map<String, String> names = new HashMap<>();
     private String preferredName;
 
     public GeoStation(JSONObject json) {
 
-        Double latitude = null;
-        Double longitude = null;
+        Double latitude;
+        Double longitude;
 
         geoPoints = (json.has(BBOX)) ? new GeoPoints(json.optJSONObject(BBOX)) : null;
         latitude = json.optDouble(LAT);

@@ -1,7 +1,5 @@
 package com.career.talentomobile.climeviewer.model;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.util.Log;
 
 import com.google.android.gms.location.places.Place;
@@ -10,10 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by malkomich on 03/10/2016.
@@ -22,9 +18,9 @@ public class GeoInfo {
 
     private static final String GEO_STATIONS = "geonames";
 
-    private String placeName;
+    private final String placeName;
+    private final Coordinates placeCoords;
     private List<GeoStation> stations;
-    private Coordinates placeCoords;
 
     public GeoInfo(JSONObject json, Place place) {
         placeName = place.getName().toString();

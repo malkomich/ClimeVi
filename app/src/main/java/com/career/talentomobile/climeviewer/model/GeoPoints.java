@@ -14,10 +14,10 @@ public class GeoPoints {
     private static final String EAST = "east";
     private static final String WEST = "west";
 
-    private double northPoint;
-    private double southPoint;
-    private double eastPoint;
-    private double westPoint;
+    private final double northPoint;
+    private final double southPoint;
+    private final double eastPoint;
+    private final double westPoint;
 
     GeoPoints(JSONObject json) {
         northPoint = json.optDouble(NORTH);

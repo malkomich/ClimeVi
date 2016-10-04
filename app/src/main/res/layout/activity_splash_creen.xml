@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:background="@drawable/bg_sky"
+        android:contentDescription="@string/splash_bg_description"
         android:scaleType = "centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +14,7 @@
     </ImageView>
 
     <LinearLayout
-        android:id="@+id/splashLayout"
+        android:id="@+id/splashContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,6 +23,7 @@
 
         <ImageView
             android:id="@+id/splashscreen"
+            android:contentDescription="@string/splash_icon_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_splash_image"
@@ -34,4 +36,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</merge>

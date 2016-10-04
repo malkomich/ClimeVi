@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Clime Viewer</string>
     <string name="title_activity_map_view">Map View</string>
+    <string name="splash_bg_description">Splash screen background</string>
+    <string name="history_bg_description">Dark background to focus on history slide panel</string>
+    <string name="splash_icon_description">App icon on splash screen</string>
 </resources>

@@ -1,17 +1,12 @@
 package com.career.talentomobile.climeviewer.model;
 
-import android.util.Log;
-
-import java.util.Map;
-import java.util.Objects;
-
 /**
  * Created by malkomich on 03/10/2016.
  */
 public class Coordinates {
 
-    private double latitude;
-    private double longitude;
+    private final double latitude;
+    private final double longitude;
 
     public Coordinates(double latitude, double longitude) {
         this.latitude = latitude;
@@ -38,11 +33,9 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object object) {
-        if(object instanceof Coordinates && ((Coordinates)object).latitude == latitude &&
-                ((Coordinates)object).longitude == longitude) {
-            return true;
-        }
-        return false;
+        return object instanceof Coordinates &&
+            ((Coordinates)object).latitude == latitude &&
+            ((Coordinates)object).longitude == longitude;
     }
 
     /**

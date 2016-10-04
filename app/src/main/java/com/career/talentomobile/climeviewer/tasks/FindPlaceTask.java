@@ -15,7 +15,7 @@ public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
 
     private static final String TAG = FindPlaceTask.class.getName();
 
-    private OnGeoLocationInfoListener listener;
+    private final OnGeoLocationInfoListener listener;
 
     public FindPlaceTask(OnGeoLocationInfoListener listener) {
         super();

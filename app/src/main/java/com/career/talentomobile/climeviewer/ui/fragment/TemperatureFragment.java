@@ -2,6 +2,7 @@ package com.career.talentomobile.climeviewer.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,7 @@ import com.career.talentomobile.climeviewer.ui.view.TemperatureView;
 /**
  * Created by malkomich on 04/10/2016.
  */
-
-public class TemperatureFragment extends BaseFragment implements TemperatureView {
+public class TemperatureFragment extends Fragment implements TemperatureView {
 
     private static final String TAG = TemperatureFragment.class.getName();
 

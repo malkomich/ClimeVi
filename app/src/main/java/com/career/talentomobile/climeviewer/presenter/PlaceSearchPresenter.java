@@ -21,7 +21,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
 
     private static final String TAG = PlaceSearchPresenter.class.getName();
 
-    private PlaceSearchView view;
+    private final PlaceSearchView view;
 
     public PlaceSearchPresenter(PlaceSearchView view) {
         this.view = view;
@@ -48,9 +48,8 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
      *
      * @param geoInfo
      * @param mContext
-     * @return
      */
-    public boolean saveRequest(GeoInfo geoInfo, Context mContext) {
+    public void saveRequest(GeoInfo geoInfo, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences(MainActivity.HISTORY, 0);
         Gson gson = new Gson();
 
@@ -65,8 +64,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
             editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);
             String json = gson.toJson(geoInfo);
             editor.putString(MainActivity.HISTORY_ITEM + "_" + length, json);
-            return editor.commit();
+            editor.commit();
         }
-        return true;
     }
 }

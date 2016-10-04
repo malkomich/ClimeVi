@@ -16,7 +16,7 @@ import com.career.talentomobile.climeviewer.R;
 public class SplashScreenActivity extends Activity {
 
     /** Splash millis duration **/
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final static int SPLASH_DISPLAY_LENGTH = 2000;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -24,7 +24,7 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.activity_splash_creen);
 
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.up_half);
-        LinearLayout animView = (LinearLayout) findViewById(R.id.splashLayout);
+        LinearLayout animView = (LinearLayout) findViewById(R.id.splashContent);
         animView.setAnimation(anim);
 
         /* New Handler to start the main Activity

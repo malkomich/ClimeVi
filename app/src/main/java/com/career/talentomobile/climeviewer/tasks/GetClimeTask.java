@@ -15,7 +15,7 @@ public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
 
     private static final String TAG = GetClimeTask.class.getName();
 
-    private OnWeatherInfoListener listener;
+    private final OnWeatherInfoListener listener;
 
     public GetClimeTask(OnWeatherInfoListener listener) {
         super();

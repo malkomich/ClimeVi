@@ -1,7 +1,5 @@
 package com.career.talentomobile.climeviewer.data.rest;
 
-import android.location.Geocoder;
-
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.location.places.Place;
 
@@ -33,7 +31,7 @@ public class GeoInfoGetter {
     }
 
     public boolean apiSuccess() {
-        return (geoInfo != null) ? true : false;
+        return geoInfo != null;
     }
 
     public GeoInfo getGeoInfo() {
