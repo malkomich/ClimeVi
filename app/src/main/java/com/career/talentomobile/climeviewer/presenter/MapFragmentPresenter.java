@@ -91,39 +91,31 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         Log.d(TAG, "onConnected");
 
         if (view.checkLocationPermission()) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mApiClient);
+            if (mLastLocation != null) {
+                double lat = mLastLocation.getLatitude();
+                double lng = mLastLocation.getLongitude();
+
+                LatLng loc = new LatLng(lat, lng);
+                MarkerOptions markerOptions = createMarkOptions(loc, "Current Position", null);
+                mMap.addMarker(markerOptions);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+            }
+            LocationRequest mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(1000);
+            mLocationRequest.setFastestInterval(1000);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+            // Check if GPS enabled, otherwise show dialog to enable it.
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(
+                mLocationRequest);
+            builder.setAlwaysShow(true);
+            PendingResult<LocationSettingsResult> result =
+                LocationServices.SettingsApi.checkLocationSettings(mApiClient, builder.build());
+            result.setResultCallback(this);
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mApiClient, mLocationRequest, this);
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mApiClient);
-        if (mLastLocation != null) {
-            double lat = mLastLocation.getLatitude();
-            double lng = mLastLocation.getLongitude();
-
-            LatLng loc = new LatLng(lat, lng);
-            MarkerOptions markerOptions = createMarkOptions(loc, "Current Position", null);
-            mMap.addMarker(markerOptions);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-        }
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-            .addLocationRequest(mLocationRequest);
-        builder.setAlwaysShow(true);
-
-        PendingResult<LocationSettingsResult> result =
-            LocationServices.SettingsApi.checkLocationSettings(mApiClient, builder.build());
-        result.setResultCallback(this);
-
-        LocationServices.FusedLocationApi.requestLocationUpdates(mApiClient, mLocationRequest, this);
     }
 
     @Override
@@ -167,7 +159,6 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     public boolean onMyLocationButtonClick() {
         Log.d(TAG, "onMyLocationButtonClick");
 
-        view.makeToast("MyLocation button clicked");
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
