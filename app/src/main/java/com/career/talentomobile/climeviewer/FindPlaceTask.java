@@ -3,7 +3,7 @@ package com.career.talentomobile.climeviewer;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.career.talentomobile.climeviewer.callback.OnGeoLocationInfo;
+import com.career.talentomobile.climeviewer.callback.OnGeoLocationInfoListener;
 import com.career.talentomobile.climeviewer.model.GeoInfo;
 import com.google.android.gms.location.places.Place;
 
@@ -14,9 +14,9 @@ public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
 
     private static final String TAG = FindPlaceTask.class.getName();
 
-    private OnGeoLocationInfo listener;
+    private OnGeoLocationInfoListener listener;
 
-    public FindPlaceTask(OnGeoLocationInfo listener) {
+    public FindPlaceTask(OnGeoLocationInfoListener listener) {
         super();
         this.listener = listener;
     }
