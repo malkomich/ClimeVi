@@ -24,10 +24,13 @@ public class FindPlaceTask extends AsyncTask<Place, Void, GeoInfo> {
      */
     @Override
     protected GeoInfo doInBackground(Place... params) {
-        Place place = params[0];
-        GeoInfoGetter geoInfoGetter = new GeoInfoGetter(place);
-        if(geoInfoGetter.apiSuccess()) {
-            return geoInfoGetter.getGeoInfo();
+
+        if(params.length > 0) {
+            Place place = params[0];
+            GeoInfoGetter geoInfoGetter = new GeoInfoGetter(place);
+            if (geoInfoGetter.apiSuccess()) {
+                return geoInfoGetter.getGeoInfo();
+            }
         }
         return null;
     }

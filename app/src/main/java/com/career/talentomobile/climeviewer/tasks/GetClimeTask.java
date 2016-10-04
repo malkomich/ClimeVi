@@ -25,10 +25,13 @@ public class GetClimeTask extends AsyncTask<GeoPoints, Void, WeatherInfo> {
      */
     @Override
     protected WeatherInfo doInBackground(GeoPoints... geoPoints) {
-        GeoPoints area = geoPoints[0];
-        WeatherInfoGetter weatherInfoGetter = new WeatherInfoGetter(area);
-        if(weatherInfoGetter.apiSuccess()) {
-            return weatherInfoGetter.getWeatherInfo();
+
+        if(geoPoints.length > 0) {
+            GeoPoints area = geoPoints[0];
+            WeatherInfoGetter weatherInfoGetter = new WeatherInfoGetter(area);
+            if (weatherInfoGetter.apiSuccess()) {
+                return weatherInfoGetter.getWeatherInfo();
+            }
         }
         return null;
     }
