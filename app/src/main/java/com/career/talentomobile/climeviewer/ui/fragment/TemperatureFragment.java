@@ -55,8 +55,9 @@ public class TemperatureFragment extends BaseFragment implements TemperatureView
     @Override
     public void setTemperature(double temperature) {
         Log.d(TAG, "setTemperature: " + temperature);
+
         temperatureBar.setProgress((int) Util.celsiusToFahrenheit(temperature));
-        temperatureText.setText(temperature + "º");
+        temperatureText.setText(String.valueOf(temperature));
         temperatureLayout.setVisibility(View.VISIBLE);
     }
 }

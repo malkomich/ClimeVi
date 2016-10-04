@@ -7,6 +7,6 @@
 
     <color name="grey_light">#eff3f5</color>
     <color name="temp_high">#DF0101</color>
-    <color name="temp_medium">#BFFF00</color>
+    <color name="temp_medium">#F4FA58</color>
     <color name="temp_low">#2ECCFA</color>
 </resources>

@@ -20,6 +20,12 @@
         android:layout_marginRight="@dimen/margin_huge"
         android:name="com.career.talentomobile.climeviewer.ui.fragment.PlaceSearchFragment"/>
 
+    <fragment
+        android:id="@+id/temp_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment"/>
+    
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -33,11 +39,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.career.talentomobile.climeviewer.ui.fragment.HistoryFragment"/>
-
-    <fragment
-        android:id="@+id/temp_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.TemperatureFragment"/>
 
 </FrameLayout>

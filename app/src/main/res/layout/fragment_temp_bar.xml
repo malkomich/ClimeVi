@@ -10,7 +10,8 @@
 
     <FrameLayout
         android:layout_width="@dimen/bar_width"
-        android:layout_height="@dimen/bar_height">
+        android:layout_height="@dimen/bar_height"
+        android:layout_marginLeft="@dimen/margin_small">
 
         <LinearLayout
             android:id="@+id/temperatureSection"
@@ -27,7 +28,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:max="140"
+            android:max="135"
             android:layout_margin="@dimen/margin_tiny"
             android:progressDrawable="@drawable/gradient_bar"/>
 
@@ -35,6 +36,8 @@
             android:id="@+id/temperatureText"
             android:layout_gravity="center"
             android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            android:layout_marginLeft="1sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
