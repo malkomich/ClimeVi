@@ -21,7 +21,6 @@ import java.util.Locale;
 public class GeoInfo {
 
     private static final String GEO_STATIONS = "geonames";
-    private static final String COUNTRY_CODE = "countryCode";
 
     private String placeName;
     private List<GeoStation> stations;
@@ -58,5 +57,34 @@ public class GeoInfo {
 
     public List<GeoStation> getStations() {
         return stations;
+    }
+
+    /**
+     * Get the limit points of the area which contains all the stations.
+     *
+     * @return GeoPoints
+     */
+    public GeoPoints getAreaPoints() {
+        double north = - Double.MAX_VALUE;
+        double south = Double.MAX_VALUE;
+        double east = - Double.MAX_VALUE;
+        double west = Double.MAX_VALUE;
+
+        for(GeoStation geoStation: stations) {
+            GeoPoints stationPoints = geoStation.getGeoPoints();
+            if(stationPoints != null) {
+                north = (stationPoints.getNorth() > north) ? stationPoints.getNorth() : north;
+                south = (stationPoints.getSouth() < south) ? stationPoints.getSouth() : south;
+                east = (stationPoints.getEast() > east) ? stationPoints.getEast() : east;
+                west = (stationPoints.getWest() < west) ? stationPoints.getWest() : west;
+            } else {
+                Coordinates stationsCoords = geoStation.getCoordinates();
+                north = (stationsCoords.getLatitude() > north) ? stationsCoords.getLatitude() : north;
+                south = (stationsCoords.getLatitude() < south) ? stationsCoords.getLatitude() : south;
+                east = (stationsCoords.getLongitude() > east) ? stationsCoords.getLongitude() : east;
+                west = (stationsCoords.getLongitude() < west) ? stationsCoords.getLongitude() : west;
+            }
+        }
+        return new GeoPoints(north, south, east, west);
     }
 }
