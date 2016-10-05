@@ -14,7 +14,7 @@ import java.net.URL;
 /**
  * Generic REST client to retrieve data from web services.
  */
-public abstract class AbstractGetter {
+abstract class AbstractGetter {
 
     private static final String TAG = "GEONAMES SERVICE API";
 

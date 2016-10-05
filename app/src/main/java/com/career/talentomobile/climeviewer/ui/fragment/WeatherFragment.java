@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
 import com.career.talentomobile.climeviewer.util.MathUtils;
@@ -34,11 +32,8 @@ public class WeatherFragment extends BaseFragment implements WeatherView, View.O
 
     private ProgressBar temperatureBar;
     private TextView temperatureText;
-    private FloatingActionButton temperatureButton;
-
     private ProgressBar humidityBar;
     private TextView humidityText;
-    private FloatingActionButton humidityButton;
 
     /* (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreate()
@@ -63,13 +58,15 @@ public class WeatherFragment extends BaseFragment implements WeatherView, View.O
 
         temperatureBar = (ProgressBar) view.findViewById(R.id.temperatureBar);
         temperatureText = (TextView) view.findViewById(R.id.temperatureText);
-        temperatureButton = (FloatingActionButton) view.findViewById(R.id.temperatureButton);
+
+        FloatingActionButton temperatureButton = (FloatingActionButton) view.findViewById(R.id.temperatureButton);
         temperatureButton.setOnClickListener(this);
         temperatureButton.setOnLongClickListener(this);
 
         humidityBar = (ProgressBar) view.findViewById(R.id.humidityBar);
         humidityText = (TextView) view.findViewById(R.id.humidityText);
-        humidityButton = (FloatingActionButton) view.findViewById(R.id.humidityButton);
+
+        FloatingActionButton humidityButton = (FloatingActionButton) view.findViewById(R.id.humidityButton);
         humidityButton.setOnClickListener(this);
         humidityButton.setOnLongClickListener(this);
 
@@ -103,7 +100,7 @@ public class WeatherFragment extends BaseFragment implements WeatherView, View.O
      */
     @Override
     public void setHumidity(double humidity) {
-        humidityText.setText((int) humidity + "%");
+        humidityText.setText(getString(R.string.percentage, (int) humidity));
 
         makeBarAnimation(humidityBar, (int) humidity);
     }

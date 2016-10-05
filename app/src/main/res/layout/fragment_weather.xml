@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right">
+        android:layout_gravity="center_vertical|end">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/temperatureButton"
@@ -34,9 +34,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="@dimen/bar_width"
         android:layout_height="@dimen/bar_height"
-        android:layout_gravity="center_vertical|left"
+        android:layout_gravity="center_vertical|start"
         android:layout_marginLeft="@dimen/margin_small"
-        android:elevation="@dimen/design_fab_elevation">
+        android:layout_marginStart="@dimen/margin_small">
 
         <LinearLayout
             android:layout_width="match_parent"

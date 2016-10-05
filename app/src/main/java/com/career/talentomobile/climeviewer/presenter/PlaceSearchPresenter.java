@@ -65,7 +65,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
             editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);
             String json = gson.toJson(geoInfo);
             editor.putString(MainActivity.HISTORY_ITEM + "_" + length, json);
-            editor.commit();
+            editor.apply();
         }
     }
 }

@@ -12,4 +12,5 @@
 
     <string name="no_weather_data">No weather data available on this area</string>
     <string name="no_stations_data">There are not weather stations on this area</string>
+    <string name="percentage">%1$d \%</string>
 </resources>

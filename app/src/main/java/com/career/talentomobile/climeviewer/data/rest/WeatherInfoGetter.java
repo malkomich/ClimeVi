@@ -1,7 +1,5 @@
 package com.career.talentomobile.climeviewer.data.rest;
 
-import android.util.Log;
-
 import com.career.talentomobile.climeviewer.model.GeoPoints;
 import com.career.talentomobile.climeviewer.model.WeatherInfo;
 
@@ -15,7 +13,6 @@ import java.net.URL;
  */
 public class WeatherInfoGetter extends AbstractGetter {
 
-    private static final String TAG = WeatherInfoGetter.class.getName();
     private static final String BASE_URL ="http://api.geonames.org/weatherJSON?username=ilgeonamessample";
 
     private WeatherInfo weatherInfo;

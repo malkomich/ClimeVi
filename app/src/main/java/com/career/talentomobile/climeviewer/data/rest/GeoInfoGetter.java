@@ -15,12 +15,11 @@ import java.net.URLEncoder;
  */
 public class GeoInfoGetter extends AbstractGetter {
 
-    private static final String TAG = GeoInfoGetter.class.getName();
     private static final String BASE_URL ="http://api.geonames.org/searchJSON?maxRows=20&startRow=0&lang=en&" +
         "isNameRequired=true&style=FULL&username=ilgeonamessample";
 
+    private final Place place;
     private GeoInfo geoInfo;
-    private Place place;
 
     public GeoInfoGetter(Place place) {
         this.place = place;
@@ -54,10 +53,7 @@ public class GeoInfoGetter extends AbstractGetter {
             String path = BASE_URL + "&q=" + URLEncoder.encode(place,"UTF-8");
             return new URL(path);
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-
-        } catch (UnsupportedEncodingException e) {
+        } catch (MalformedURLException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

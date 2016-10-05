@@ -26,12 +26,9 @@ import java.util.List;
  */
 public class HistoryFragment extends ListFragment implements HistoryView {
 
-    private static final String TAG = HistoryFragment.class.getName();
-
     private HistoryPresenter presenter;
     private ViewGroup hiddenPanel;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
-    private boolean fragmentShown;
 
     /* (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreate()
@@ -124,7 +121,6 @@ public class HistoryFragment extends ListFragment implements HistoryView {
         presenter.loadHistory(onPlaceUpdatedListener.getHistorySharedPreferences());
 
         if(!getListAdapter().isEmpty()) {
-            fragmentShown = true;
             Animation bottomHalf = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_half);
             getListView().setAnimation(bottomHalf);
             hiddenPanel.setVisibility(View.VISIBLE);
@@ -144,7 +140,6 @@ public class HistoryFragment extends ListFragment implements HistoryView {
             @Override
             public void onAnimationEnd(Animation animation) {
                 hiddenPanel.setVisibility(View.INVISIBLE);
-                fragmentShown = false;
             }
 
             @Override

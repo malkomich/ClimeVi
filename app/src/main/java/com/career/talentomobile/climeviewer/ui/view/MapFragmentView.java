@@ -11,7 +11,7 @@ public interface MapFragmentView {
     /**
      * Check if the location permission is enabled.
      *
-     * @return
+     * @return boolean
      */
     boolean checkLocationPermission();
 

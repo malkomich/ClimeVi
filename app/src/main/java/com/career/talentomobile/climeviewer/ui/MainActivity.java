@@ -20,9 +20,7 @@ import com.career.talentomobile.climeviewer.ui.view.WeatherView;
 public class MainActivity extends FragmentActivity implements OnPlaceUpdatedListener, View.OnClickListener,
     View.OnLongClickListener {
 
-    private static final String TAG = MainActivity.class.getName();
-
-    public static final String HISTORY = "history";
+    private static final String HISTORY = "history";
     public static final String HISTORY_LENGTH = "history_length";
     public static final String HISTORY_ITEM = "history_item";
 

@@ -21,8 +21,6 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
  */
 public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
 
-    private static final String TAG = PlaceSearchFragment.class.getName();
-
     private PlaceSearchPresenter presenter;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
 

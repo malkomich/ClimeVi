@@ -65,7 +65,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     /**
      * Initialize API map client & enables geolocation.
      */
-    public void initMapsApi() {
+    private void initMapsApi() {
         if(view.checkLocationPermission()) {
             if(mApiClient == null) {
                 view.buildGoogleApiClient();

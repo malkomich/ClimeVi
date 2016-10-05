@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class LogUtils {
 
+    private static final String PACKAGE_PREFIX = "org.junit.";
+
     private static Boolean running;
 
     public static void d(String tag, String message) {
@@ -33,14 +35,14 @@ public class LogUtils {
         List<StackTraceElement> list = Arrays.asList(stackTrace);
 
         for (StackTraceElement element : list) {
-            if (element.getClassName().startsWith("org.junit.")) {
+            if (element.getClassName().startsWith(PACKAGE_PREFIX)) {
                 running = true;
                 return running;
             }
         }
 
         running = false;
-        return running;
+        return false;
     }
 
 }
