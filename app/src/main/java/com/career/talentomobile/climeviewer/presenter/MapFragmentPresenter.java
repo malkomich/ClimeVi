@@ -29,6 +29,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -46,7 +48,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     private GoogleMap mMap;
     private GoogleApiClient mApiClient;
     private Location mLastLocation;
-    private Marker mCurrLocationMarker;
+    private List<Marker> stationMarkers = new ArrayList<>();
 
     public MapFragmentPresenter(MapFragmentView view) {
         this.view = view;
@@ -113,8 +115,6 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
                 double lng = mLastLocation.getLongitude();
 
                 LatLng loc = new LatLng(lat, lng);
-                MarkerOptions markerOptions = createMarkOptions(loc, "Current Position", null);
-                mMap.addMarker(markerOptions);
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
             }
             LocationRequest mLocationRequest = new LocationRequest();
@@ -160,10 +160,6 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         Log.d(TAG, "onLocationChanged");
 
         mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         // Move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -220,6 +216,13 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
         mMap.moveCamera(CameraUpdateFactory.newLatLng(placeCoords));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
 
+        // Clean previous map markers
+        for(Marker marker: stationMarkers) {
+            marker.remove();
+        }
+        stationMarkers = new ArrayList<>();
+
+        // Create a marker for each weather station
         for(GeoStation station: geoInfo.getStations()) {
             LatLng stationCoords = new LatLng(station.getCoordinates().getLatitude(),
                 station.getCoordinates().getLongitude());
@@ -228,7 +231,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
                 geoInfo.getPlaceName();
             MarkerOptions markerOptions = createMarkOptions(stationCoords, markTitle,
                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-            mCurrLocationMarker = mMap.addMarker(markerOptions);
+            stationMarkers.add(mMap.addMarker(markerOptions));
         }
     }
 
