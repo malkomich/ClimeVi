@@ -1,6 +1,6 @@
 package com.career.talentomobile.climeviewer.data.rest;
 
-import android.util.Log;
+import com.career.talentomobile.climeviewer.util.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ public abstract class AbstractGetter {
 
         StringBuilder output = new StringBuilder();
 
-        Log.d(TAG, "GET: " + url.toString());
+        LogUtils.d(TAG, "GET: " + url.toString());
 
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -62,7 +62,7 @@ public abstract class AbstractGetter {
 
         }
 
-        Log.d(TAG, "RESPONSE: " + output.toString());
+        LogUtils.d(TAG, "RESPONSE: " + output.toString());
 
         parseOutput(output.toString());
     }

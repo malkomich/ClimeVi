@@ -37,6 +37,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:9.2.0'
 
     testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.+"
+    testCompile 'org.json:json:20140107'
 
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 

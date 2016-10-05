@@ -39,7 +39,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
     GoogleMap.OnMyLocationButtonClickListener{
 
     private static final String TAG = MapFragmentPresenter.class.getName();
-    private static final float DEFAULT_ZOOM = 9.0f;
+    private static final float DEFAULT_ZOOM = 10.0f;
 
     private final MapFragmentView view;
 

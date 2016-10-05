@@ -19,9 +19,9 @@ public class GeoInfo {
     // API naming of the JSON objects
     private static final String GEO_STATIONS = "geonames";
 
-    private final String placeName;
-    private final Coordinates placeCoords;
-    private List<GeoStation> stations;
+    private String placeName;
+    private Coordinates placeCoords;
+    private List<GeoStation> stations = new ArrayList<>();
 
     public GeoInfo(JSONObject json, Place place) {
         placeName = place.getName().toString();
@@ -43,6 +43,8 @@ public class GeoInfo {
             e.printStackTrace();
         }
     }
+
+    public GeoInfo() {}
 
     /**
      * Gets the name of the place, which is retrieved by Google Places API.
@@ -71,6 +73,10 @@ public class GeoInfo {
         return stations;
     }
 
+    public void addStation(GeoStation station) {
+        this.stations.add(station);
+    }
+
     /**
      * Get the limit points of the area which contains all the stations.
      *
@@ -96,7 +102,6 @@ public class GeoInfo {
                 east = (stationsCoords.getLongitude() > east) ? stationsCoords.getLongitude() : east;
                 west = (stationsCoords.getLongitude() < west) ? stationsCoords.getLongitude() : west;
             }
-            Log.d("GeoInfo", "EAST: " + east + ", WEST:" + west);
         }
         return new GeoPoints(north, south, east, west);
     }

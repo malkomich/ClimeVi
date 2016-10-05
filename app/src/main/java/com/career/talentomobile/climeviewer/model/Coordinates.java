@@ -37,8 +37,8 @@ public class Coordinates {
     @Override
     public boolean equals(Object object) {
         return object instanceof Coordinates &&
-            ((Coordinates)object).latitude == latitude &&
-            ((Coordinates)object).longitude == longitude;
+            ((Coordinates)object).getLatitude() == latitude &&
+            ((Coordinates)object).getLongitude() == longitude;
     }
 
     /**
@@ -49,8 +49,8 @@ public class Coordinates {
      * @return boolean
      */
     public boolean isNear(Coordinates coords) {
-        boolean latitudeValid = Math.abs(Math.abs(latitude) - Math.abs(coords.latitude)) <= 3;
-        boolean longitudeValid = Math.abs(Math.abs(longitude) - Math.abs(coords.longitude)) <= 3;
+        boolean latitudeValid = Math.abs(Math.abs(latitude) - Math.abs(coords.getLatitude())) <= 3;
+        boolean longitudeValid = Math.abs(Math.abs(longitude) - Math.abs(coords.getLongitude())) <= 3;
         return latitudeValid && longitudeValid;
     }
 }
