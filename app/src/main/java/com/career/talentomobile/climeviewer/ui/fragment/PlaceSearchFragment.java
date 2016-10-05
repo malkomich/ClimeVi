@@ -82,6 +82,8 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
     @Override
     public void updatePlace(GeoInfo geoInfo) {
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
-        presenter.saveRequest(geoInfo, onPlaceUpdatedListener.getHistorySharedPreferences());
+        if(geoInfo.hasStations()) {
+            presenter.saveRequest(geoInfo, onPlaceUpdatedListener.getHistorySharedPreferences());
+        }
     }
 }

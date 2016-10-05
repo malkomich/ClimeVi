@@ -122,11 +122,13 @@ public class HistoryFragment extends ListFragment implements HistoryView {
     @Override
     public void show() {
         presenter.loadHistory(onPlaceUpdatedListener.getHistorySharedPreferences());
-        fragmentShown = true;
 
-        Animation bottomHalf = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_half);
-        getListView().setAnimation(bottomHalf);
-        hiddenPanel.setVisibility(View.VISIBLE);
+        if(!getListAdapter().isEmpty()) {
+            fragmentShown = true;
+            Animation bottomHalf = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_half);
+            getListView().setAnimation(bottomHalf);
+            hiddenPanel.setVisibility(View.VISIBLE);
+        }
     }
 
     /* (non-Javadoc)

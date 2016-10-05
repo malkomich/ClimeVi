@@ -19,4 +19,6 @@
     <dimen name="bar_width">35dp</dimen>
     <dimen name="bar_border">4dp</dimen>
 
+    <dimen name="button_margin">2dp</dimen>
+
 </resources>

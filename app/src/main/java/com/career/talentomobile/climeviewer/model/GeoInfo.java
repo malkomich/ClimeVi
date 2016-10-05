@@ -108,4 +108,13 @@ public class GeoInfo {
         }
         return new GeoPoints(north, south, east, west);
     }
+
+    /**
+     * Check if the area delimited by this place contains any weather station.
+     *
+     * @return boolean
+     */
+    public boolean hasStations() {
+        return !stations.isEmpty();
+    }
 }

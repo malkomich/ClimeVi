@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">21sp</dimen>
+    <dimen name="text_size_huge">45sp</dimen>
+
+    <dimen name="margin_tiny">8dp</dimen>
+    <dimen name="margin_small">12dp</dimen>
+    <dimen name="margin_medium">24dp</dimen>
+    <dimen name="margin_huge">85dp</dimen>
+
+    <dimen name="border_radius_large">40dp</dimen>
+
+    <dimen name="elevation">20dp</dimen>
+    <dimen name="slide_height">400dp</dimen>
+
+    <dimen name="bar_height">300dp</dimen>
+    <dimen name="bar_width">50dp</dimen>
+    <dimen name="bar_border">6dp</dimen>
+
+    <dimen name="button_margin">8dp</dimen>
+
+</resources>

@@ -25,6 +25,8 @@ import com.career.talentomobile.climeviewer.ui.view.WeatherView;
  */
 public class WeatherFragment extends BaseFragment implements WeatherView, View.OnClickListener, View.OnLongClickListener {
 
+    private static final int PROGRESS_SPEED = 3500;
+
     private WeatherPresenter presenter;
     private FrameLayout weatherLayout;
     private FrameLayout temperatureSection;
@@ -103,7 +105,7 @@ public class WeatherFragment extends BaseFragment implements WeatherView, View.O
     public void setHumidity(double humidity) {
         humidityText.setText((int) humidity + "%");
 
-        makeBarAnimation(temperatureBar, (int) humidity);
+        makeBarAnimation(humidityBar, (int) humidity);
     }
 
     /* (non-Javadoc)
@@ -162,8 +164,8 @@ public class WeatherFragment extends BaseFragment implements WeatherView, View.O
      */
     private void makeBarAnimation(ProgressBar bar, int newProgressVal) {
         ObjectAnimator animation = ObjectAnimator.ofInt(bar, "progress",
-            temperatureBar.getProgress(), newProgressVal);
-        animation.setDuration(3500);
+            bar.getProgress(), newProgressVal);
+        animation.setDuration(PROGRESS_SPEED);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
     }

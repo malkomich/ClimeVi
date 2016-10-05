@@ -60,7 +60,7 @@ public class PlaceSearchPresenter implements PlaceSelectionListener, OnGeoLocati
         String prevJson = prefs.getString(MainActivity.HISTORY_ITEM + "_" + (length - 1), null);
         GeoInfo prevEntry = gson.fromJson(prevJson, GeoInfo.class);
 
-        if(!prevEntry.getPlaceCoordinates().equals(geoInfo.getPlaceCoordinates())) {
+        if(prevEntry == null || !prevEntry.getPlaceCoordinates().equals(geoInfo.getPlaceCoordinates())) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(MainActivity.HISTORY_LENGTH, length + 1);
             String json = gson.toJson(geoInfo);

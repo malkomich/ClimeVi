@@ -48,10 +48,13 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         MapFragmentView mapFragmentView = (MapFragmentView) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragmentView.updateLocation(geoInfo);
 
-        // Show weather info fragment
-        WeatherView weatherView = (WeatherView) getSupportFragmentManager()
-            .findFragmentById(R.id.temp_fragment);
-        weatherView.updateWeather(geoInfo.getAreaPoints());
+        if(geoInfo.hasStations()) {
+            // Show weather info fragment
+            WeatherView weatherView = (WeatherView) getSupportFragmentManager().findFragmentById(R.id.temp_fragment);
+            weatherView.updateWeather(geoInfo.getAreaPoints());
+        } else {
+            Toast.makeText(this, R.string.no_stations_data, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /* (non-Javadoc)
