@@ -36,7 +36,7 @@ public abstract class AbstractGetter {
 
         StringBuilder output = new StringBuilder();
 
-        LogUtils.d(TAG, "GET: " + url.toString());
+        LogUtils.i(TAG, "GET: " + url.toString());
 
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -62,7 +62,7 @@ public abstract class AbstractGetter {
 
         }
 
-        LogUtils.d(TAG, "RESPONSE: " + output.toString());
+        LogUtils.i(TAG, "RESPONSE: " + output.toString());
 
         parseOutput(output.toString());
     }

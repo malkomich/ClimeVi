@@ -164,12 +164,7 @@ public class MapFragmentPresenter implements OnMapReadyCallback, GoogleApiClient
             mCurrLocationMarker.remove();
         }
 
-        // Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = createMarkOptions(latLng, "Current Position",
-            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
-
         // Move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));

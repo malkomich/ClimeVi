@@ -5,4 +5,7 @@
     <string name="history_bg_description">Dark background to focus on history slide panel</string>
     <string name="splash_icon_description">App icon on splash screen</string>
     <string name="no_weather_data">No weather data available in this place</string>
+    <string name="temperature_button">Show the temperature</string>
+    <string name="humidity_button">Show the humidity</string>
+    <string name="history_button">Display the history</string>
 </resources>

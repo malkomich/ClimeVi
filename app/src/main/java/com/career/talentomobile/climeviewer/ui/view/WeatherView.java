@@ -5,7 +5,7 @@ import com.career.talentomobile.climeviewer.model.GeoPoints;
 /**
  * View logic definition for the weather section.
  */
-public interface WeatherView {
+public interface WeatherView extends BaseView {
 
     /**
      * Update the weather info in the view, thanks to geolocation points of the area.

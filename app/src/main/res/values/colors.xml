@@ -10,7 +10,12 @@
     <color name="secondaryColorControlHighlight">#E91E63</color>
 
     <color name="grey_light">#eff3f5</color>
+
     <color name="temp_high">#DF0101</color>
     <color name="temp_medium">#F4FA58</color>
     <color name="temp_low">#2ECCFA</color>
+
+    <color name="humidity_high">#03A9F4</color>
+    <color name="humidity_medium">#53B783</color>
+    <color name="humidity_low">#C49D43</color>
 </resources>

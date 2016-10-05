@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:max="100"
                 android:layout_margin="@dimen/margin_tiny"
-                android:progressDrawable="@drawable/gradient_bar"/>
+                android:progressDrawable="@drawable/gradient_bar_alt"/>
 
             <TextView
                 android:id="@+id/humidityText"

@@ -18,6 +18,12 @@ public class LogUtils {
         }
     }
 
+    public static void i(String tag, String message) {
+        if (!testsRunning()) {
+            Log.i(tag, message);
+        }
+    }
+
     private static boolean testsRunning() {
         if (running != null) {
             return running;
@@ -36,4 +42,5 @@ public class LogUtils {
         running = false;
         return running;
     }
+
 }

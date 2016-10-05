@@ -1,6 +1,5 @@
 package com.career.talentomobile.climeviewer.presenter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 

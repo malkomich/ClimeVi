@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.career.talentomobile.climeviewer.R;
 import com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener;
@@ -16,7 +17,8 @@ import com.career.talentomobile.climeviewer.ui.view.WeatherView;
 /**
  * Main activity, composed with fragments, which launch the application functionality.
  */
-public class MainActivity extends FragmentActivity implements OnPlaceUpdatedListener, View.OnClickListener {
+public class MainActivity extends FragmentActivity implements OnPlaceUpdatedListener, View.OnClickListener,
+    View.OnLongClickListener {
 
     private static final String TAG = MainActivity.class.getName();
 
@@ -34,6 +36,7 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+        fab.setOnLongClickListener(this);
     }
 
     /* (non-Javadoc)
@@ -73,5 +76,20 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
             default:
                 break;
         }
+    }
+
+    /* (non-Javadoc)
+     * @see android.view.View.OnLongClickListener #onLongClick()
+     */
+    @Override
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab:
+                Toast.makeText(this, R.string.history_button, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
