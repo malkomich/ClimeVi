@@ -34,8 +34,11 @@ public class WeatherPresenter implements OnWeatherInfoListener {
      */
     @Override
     public void onWeatherInfo(WeatherInfo weatherInfo) {
-        if(weatherInfo.getTemperature() != null) {
+        if(weatherInfo.isValid()) {
             view.setTemperature(weatherInfo.getTemperature());
+            view.setHumidity(weatherInfo.getHumidity());
+        } else {
+            view.noWeatherInfo();
         }
     }
 }

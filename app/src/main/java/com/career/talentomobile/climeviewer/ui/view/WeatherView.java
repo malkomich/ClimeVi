@@ -22,4 +22,17 @@ public interface WeatherView {
      *                    Temperature in Celsius
      */
     void setTemperature(double temperature);
+
+    /**
+     * Update the humidity shown in the view for the area requested.
+     *
+     * @param humidity
+ *                     Humidity percentage
+     */
+    void setHumidity(double humidity);
+
+    /**
+     * Show a view notification when no weather data provided.
+     */
+    void noWeatherInfo();
 }

@@ -33,6 +33,7 @@
         <item name="backgroundTint">@color/secondaryColorAccent</item>
         <item name="rippleColor">@color/secondaryColorControlHighlight</item>
         <item name="android:scaleType">center</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

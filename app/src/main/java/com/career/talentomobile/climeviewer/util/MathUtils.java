@@ -15,7 +15,7 @@ public class MathUtils {
      * @return double
      */
     public static double celsiusToFahrenheit(double celsius) {
-        return celsius * 9 / 5.0 + 32;
+        return (Double.isNaN(celsius)) ? celsius : celsius * 9 / 5.0 + 32;
     }
 
     /**
@@ -28,7 +28,7 @@ public class MathUtils {
      * @return double
      */
     public static double roundDouble(double number, int precision) {
-        return new BigDecimal(number)
+        return (Double.isNaN(number)) ? number : new BigDecimal(number)
             .setScale(precision, BigDecimal.ROUND_HALF_EVEN)
             .doubleValue();
     }

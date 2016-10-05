@@ -5,8 +5,10 @@ import com.google.android.gms.location.places.Place;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * REST client which gets the required data to locate a place.
@@ -48,10 +50,14 @@ public class GeoInfoGetter extends AbstractGetter {
      * @return Service URL
      */
     private URL buildURL(String place) {
-        String path = BASE_URL + "&q=" + place;
         try {
+            String path = BASE_URL + "&q=" + URLEncoder.encode(place,"UTF-8");
             return new URL(path);
+
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

@@ -1,7 +1,5 @@
 package com.career.talentomobile.climeviewer.model;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +12,10 @@ public class WeatherInfo {
     // API naming of the JSON objects
     private static final String OBSERVATIONS = "weatherObservations";
     private static final String TEMPERATURE = "temperature";
+    private static final String HUMIDITY = "humidity";
 
-    private double temp;
+    private Double temp = 0.0;
+    private Double humidity = 0.0;
 
     public WeatherInfo(JSONObject json) {
         try {
@@ -25,9 +25,12 @@ public class WeatherInfo {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 
                 temp += jsonItem.optDouble(TEMPERATURE);
+                humidity += jsonItem.optDouble(HUMIDITY);
             }
-            temp /= i;
-            Log.d("WeatherInfo", "Temperature: " + temp);
+
+            temp = (temp == 0) ? null : temp / i;
+            humidity = (humidity == 0) ? null : humidity / i;
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -40,5 +43,23 @@ public class WeatherInfo {
      */
     public Double getTemperature() {
         return temp;
+    }
+
+    /**
+     * Gets the average of the current humidity.
+     *
+     * @return humidity
+     */
+    public Double getHumidity() {
+        return humidity;
+    }
+
+    /**
+     * Check if the weather data has been successfully set.
+     *
+     * @return boolean
+     */
+    public boolean isValid() {
+        return temp != null && humidity != null;
     }
 }

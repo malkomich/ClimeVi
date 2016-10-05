@@ -6,8 +6,8 @@
     <color name="colorControlHighlight">#0acfbd</color>
     <color name="colorSlide">#455A64</color>
 
-    <color name="secondaryColorAccent">#E91E63</color>
-    <color name="secondaryColorControlHighlight">#F8BBD0</color>
+    <color name="secondaryColorAccent">#F8BBD0</color>
+    <color name="secondaryColorControlHighlight">#E91E63</color>
 
     <color name="grey_light">#eff3f5</color>
     <color name="temp_high">#DF0101</color>

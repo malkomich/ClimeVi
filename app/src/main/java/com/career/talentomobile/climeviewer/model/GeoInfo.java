@@ -35,6 +35,9 @@ public class GeoInfo {
                 JSONObject jsonItem = (JSONObject) stationJSONArray.get(i);
 
                 GeoStation geoStation = new GeoStation(jsonItem);
+                Log.d("GeoInfo", "placeCoords: " + place.getLatLng().latitude + place.getLatLng().longitude);
+                Log.d("GeoInfo", "stationCoords: " + geoStation.getCoordinates().getLatitude() + ", " + geoStation
+                    .getCoordinates().getLongitude());
                 if(geoStation.isValid() && geoStation.getCoordinates().isNear(placeCoords)) {
                     stations.add(geoStation);
                 }

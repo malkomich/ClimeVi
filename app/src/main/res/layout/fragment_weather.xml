@@ -33,7 +33,8 @@
         android:layout_width="@dimen/bar_width"
         android:layout_height="@dimen/bar_height"
         android:layout_gravity="center_vertical|left"
-        android:layout_marginLeft="@dimen/margin_small">
+        android:layout_marginLeft="@dimen/margin_small"
+        android:elevation="@dimen/design_fab_elevation">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:max="135"
+                android:max="100"
                 android:layout_margin="@dimen/margin_tiny"
                 android:progressDrawable="@drawable/gradient_bar"/>
 
