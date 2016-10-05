@@ -29,4 +29,10 @@
         <item name="android:paddingBottom">@dimen/margin_medium</item>
     </style>
 
+    <style name="CustomFloatingButton" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/secondaryColorAccent</item>
+        <item name="rippleColor">@color/secondaryColorControlHighlight</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
 </resources>

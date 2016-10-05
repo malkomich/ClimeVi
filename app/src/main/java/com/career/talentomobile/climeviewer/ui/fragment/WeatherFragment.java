@@ -2,12 +2,14 @@ package com.career.talentomobile.climeviewer.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,9 +27,17 @@ public class WeatherFragment extends Fragment implements WeatherView {
     private static final String TAG = WeatherFragment.class.getName();
 
     private WeatherPresenter presenter;
-    private LinearLayout temperatureLayout;
+    private FrameLayout weatherLayout;
+    private FrameLayout temperatureSection;
+    private FrameLayout humiditySection;
+
     private ProgressBar temperatureBar;
     private TextView temperatureText;
+    private FloatingActionButton temperatureButton;
+
+    private ProgressBar humidityBar;
+    private TextView humidityText;
+    private FloatingActionButton humidityButton;
 
     /* (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreate()
@@ -45,10 +55,18 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_temp_bar, container, false);
-        temperatureLayout = (LinearLayout) view.findViewById(R.id.weatherLayout);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        weatherLayout = (FrameLayout) view.findViewById(R.id.weatherLayout);
+        temperatureSection = (FrameLayout) view.findViewById(R.id.temperatureLayout);
+        humiditySection = (FrameLayout) view.findViewById(R.id.humidityLayout);
+
         temperatureBar = (ProgressBar) view.findViewById(R.id.temperatureBar);
         temperatureText = (TextView) view.findViewById(R.id.temperatureText);
+        temperatureButton = (FloatingActionButton) view.findViewById(R.id.temperatureButton);
+
+        humidityBar = (ProgressBar) view.findViewById(R.id.humidityBar);
+        humidityText = (TextView) view.findViewById(R.id.humidityText);
+        humidityButton = (FloatingActionButton) view.findViewById(R.id.humidityButton);
 
         return view;
     }
@@ -70,6 +88,7 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
         temperatureBar.setProgress((int) MathUtils.celsiusToFahrenheit(temperature));
         temperatureText.setText(String.valueOf(MathUtils.roundDouble(temperature, 1)));
-        temperatureLayout.setVisibility(View.VISIBLE);
+        weatherLayout.setVisibility(View.VISIBLE);
+        temperatureSection.setVisibility(View.VISIBLE);
     }
 }

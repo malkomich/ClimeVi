@@ -5,7 +5,7 @@
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_huge">40sp</dimen>
 
-    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_tiny">5dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_huge">64dp</dimen>
@@ -16,7 +16,7 @@
     <dimen name="slide_height">200dp</dimen>
 
     <dimen name="bar_height">250dp</dimen>
-    <dimen name="bar_width">30dp</dimen>
-    <dimen name="bar_border">3dp</dimen>
+    <dimen name="bar_width">35dp</dimen>
+    <dimen name="bar_border">4dp</dimen>
 
 </resources>

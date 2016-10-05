@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weatherLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/temperatureButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_temperature"
+            style="@style/CustomFloatingButton"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/humidityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_humidity"
+            style="@style/CustomFloatingButton"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/bar_width"
+        android:layout_height="@dimen/bar_height"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="@dimen/margin_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@drawable/gradient_bar_background"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/temperatureLayout"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/temperatureBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="135"
+                android:layout_margin="@dimen/margin_tiny"
+                android:progressDrawable="@drawable/gradient_bar"/>
+
+            <TextView
+                android:id="@+id/temperatureText"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/humidityLayout"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/humidityBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="135"
+                android:layout_margin="@dimen/margin_tiny"
+                android:progressDrawable="@drawable/gradient_bar"/>
+
+            <TextView
+                android:id="@+id/humidityText"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
