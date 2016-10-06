@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.career.talentomobile.climeviewer"
+<manifest package="com.github.malkomich.climeviewer"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
@@ -22,7 +22,7 @@
             android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".ui.SplashScreenActivity"
+            android:name="com.github.malkomich.climeviewer.ui.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.github.malkomich.climeviewer.ui.MainActivity"
             android:label="@string/title_activity_map_view">
         </activity>
     </application>

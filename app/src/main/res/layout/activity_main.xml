@@ -9,7 +9,7 @@
         android:id="@+id/map_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.MapFragment"/>
+        android:name="com.github.malkomich.climeviewer.ui.fragment.MapFragment"/>
 
     <fragment
         android:id="@+id/search_fragment"
@@ -17,13 +17,13 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_huge"
         android:layout_marginEnd="@dimen/margin_huge"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.PlaceSearchFragment"/>
+        android:name="com.github.malkomich.climeviewer.ui.fragment.PlaceSearchFragment"/>
 
     <fragment
         android:id="@+id/temp_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.WeatherFragment"/>
+        android:name="com.github.malkomich.climeviewer.ui.fragment.WeatherFragment"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -37,6 +37,6 @@
         android:id="@+id/history_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.career.talentomobile.climeviewer.ui.fragment.HistoryFragment"/>
+        android:name="com.github.malkomich.climeviewer.ui.fragment.HistoryFragment"/>
 
 </merge>
