@@ -15,8 +15,8 @@ import java.net.URLEncoder;
  */
 public class GeoInfoGetter extends AbstractGetter {
 
-    private static final String BASE_URL ="http://api.geonames.org/searchJSON?maxRows=20&startRow=0&lang=en&" +
-        "isNameRequired=true&style=FULL&username=ilgeonamessample";
+    private static final String BASE_URL ="http://api.geonames.org/searchJSON?maxRows=100&startRow=0&lang=en&" +
+        "isNameRequired=true&style=FULL&username=malkomich";
 
     private final Place place;
     private GeoInfo geoInfo;

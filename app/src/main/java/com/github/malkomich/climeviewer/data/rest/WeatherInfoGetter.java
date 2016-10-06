@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class WeatherInfoGetter extends AbstractGetter {
 
-    private static final String BASE_URL ="http://api.geonames.org/weatherJSON?username=ilgeonamessample";
+    private static final String BASE_URL ="http://api.geonames.org/weatherJSON?username=malkomich";
 
     private WeatherInfo weatherInfo;
 
