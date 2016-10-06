@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Clime Viewer</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-9345206162954393~8480507062</string>
+    <string name="banner_bottom_id" translatable="false">ca-app-pub-9345206162954393/2433973463</string>
+
+    <string name="app_name" translatable="false">Clime Viewer</string>
     <string name="title_activity_map_view">Map View</string>
 
     <string name="splash_bg_description">Splash screen background</string>
@@ -12,5 +15,7 @@
 
     <string name="no_weather_data">No weather data available on this area</string>
     <string name="no_stations_data">There are not weather stations on this area</string>
-    <string name="percentage">%1$d \%</string>
+
+    <string name="percentage" translatable="false">%1$d%%</string>
+
 </resources>

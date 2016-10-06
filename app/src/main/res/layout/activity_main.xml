@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
 
-    <fragment
-        android:id="@+id/map_fragment"
+    <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.github.malkomich.climeviewer.ui.fragment.MapFragment"/>
+        android:layout_above="@+id/ad_view">
 
-    <fragment
-        android:id="@+id/search_fragment"
+        <fragment
+            android:id="@+id/map_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.github.malkomich.climeviewer.ui.fragment.MapFragment"/>
+
+        <fragment
+            android:id="@+id/search_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_huge"
+            android:layout_marginEnd="@dimen/margin_huge"
+            android:name="com.github.malkomich.climeviewer.ui.fragment.PlaceSearchFragment"/>
+
+        <fragment
+            android:id="@+id/temp_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.github.malkomich.climeviewer.ui.fragment.WeatherFragment"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/margin_small"
+            android:src="@drawable/ic_history_white"/>
+
+        <fragment
+            android:id="@+id/history_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.github.malkomich.climeviewer.ui.fragment.HistoryFragment"/>
+
+    </FrameLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_huge"
-        android:layout_marginEnd="@dimen/margin_huge"
-        android:name="com.github.malkomich.climeviewer.ui.fragment.PlaceSearchFragment"/>
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_bottom_id" />
 
-    <fragment
-        android:id="@+id/temp_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.github.malkomich.climeviewer.ui.fragment.WeatherFragment"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/margin_small"
-        android:src="@drawable/ic_history_white"/>
-
-    <fragment
-        android:id="@+id/history_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.github.malkomich.climeviewer.ui.fragment.HistoryFragment"/>
-
-</merge>
+</RelativeLayout>

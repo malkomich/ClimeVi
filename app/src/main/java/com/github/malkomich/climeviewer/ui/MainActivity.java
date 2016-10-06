@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,6 +14,9 @@ import com.github.malkomich.climeviewer.model.GeoInfo;
 import com.github.malkomich.climeviewer.ui.view.HistoryView;
 import com.github.malkomich.climeviewer.ui.view.MapFragmentView;
 import com.github.malkomich.climeviewer.ui.view.WeatherView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * Main activity, composed with fragments, which launch the application functionality.
@@ -24,18 +28,7 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
     public static final String HISTORY_LENGTH = "history_length";
     public static final String HISTORY_ITEM = "history_item";
 
-    /* (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onCreate()
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-        fab.setOnLongClickListener(this);
-    }
+    private AdView mAdView;
 
     /* (non-Javadoc)
      * @see com.career.talentomobile.climeviewer.callback.OnPlaceUpdatedListener#onPlaceUpdated()
@@ -92,5 +85,70 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
                 break;
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onCreate()
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initializeAds();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
+        fab.setOnLongClickListener(this);
+    }
+
+    /* (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onPause()
+     */
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    /* (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onResume()
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onDestroy()
+     */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
+
+    /**
+     * Initialize banners with the AdMob app ID, and load them.
+     */
+    private void initializeAds() {
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+
+        AdRequest adRequest = new AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
     }
 }
