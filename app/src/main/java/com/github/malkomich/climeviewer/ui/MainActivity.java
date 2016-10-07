@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.github.malkomich.climeviewer.R;
+import com.github.malkomich.climeviewer.callback.Logger;
 import com.github.malkomich.climeviewer.callback.OnPlaceUpdatedListener;
 import com.github.malkomich.climeviewer.model.GeoInfo;
 import com.github.malkomich.climeviewer.ui.view.HistoryView;
@@ -20,17 +21,19 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Main activity, composed with fragments, which launch the application functionality.
  */
 public class MainActivity extends FragmentActivity implements OnPlaceUpdatedListener, View.OnClickListener,
-    View.OnLongClickListener {
+    View.OnLongClickListener, Logger {
 
     private static final String HISTORY = "history";
     public static final String HISTORY_LENGTH = "history_length";
     public static final String HISTORY_ITEM = "history_item";
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private AdView mAdView;
 
     /* (non-Javadoc)
@@ -100,6 +103,7 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         if(isGooglePlayServicesAvailable()) {
             setContentView(R.layout.activity_main);
 
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             initializeAds();
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -182,5 +186,24 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
             return false;
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.malkomich.climeviewer.callback.Logger#logEvent()
+     */
+    @Override
+    public void logEvent(String name, Bundle params) {
+        mFirebaseAnalytics.logEvent(name, params);
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.malkomich.climeviewer.callback.Logger#logSearch()
+     */
+    @Override
+    public void logSearch(String location, int searchLevel) {
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.LOCATION, location);
+        params.putInt(FirebaseAnalytics.Param.LEVEL, searchLevel);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, params);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.github.malkomich.climeviewer.R;
 import com.github.malkomich.climeviewer.adapter.HistoryAdapter;
+import com.github.malkomich.climeviewer.callback.Logger;
 import com.github.malkomich.climeviewer.callback.OnPlaceUpdatedListener;
 import com.github.malkomich.climeviewer.model.GeoInfo;
 import com.github.malkomich.climeviewer.presenter.HistoryPresenter;
@@ -26,9 +27,12 @@ import java.util.List;
  */
 public class HistoryFragment extends ListFragment implements HistoryView {
 
+    private static final int NUMBER_OF_REQUESTS = 1;
+
     private HistoryPresenter presenter;
     private ViewGroup hiddenPanel;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
+    private Logger logger;
 
     /* (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreate()
@@ -87,6 +91,7 @@ public class HistoryFragment extends ListFragment implements HistoryView {
     @Override
     public void updatePlace(GeoInfo geoInfo) {
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
+        logger.logSearch(geoInfo.getPlaceName(), NUMBER_OF_REQUESTS);
     }
 
     /* (non-Javadoc)
@@ -108,6 +113,7 @@ public class HistoryFragment extends ListFragment implements HistoryView {
         // the callback interface. If not, it throws an exception
         try {
             onPlaceUpdatedListener = (OnPlaceUpdatedListener) context;
+            logger = (Logger) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnPlaceUpdatedListener");
         }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.malkomich.climeviewer.R;
+import com.github.malkomich.climeviewer.callback.Logger;
 import com.github.malkomich.climeviewer.callback.OnPlaceUpdatedListener;
 import com.github.malkomich.climeviewer.model.GeoInfo;
 import com.github.malkomich.climeviewer.presenter.PlaceSearchPresenter;
@@ -21,8 +22,11 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
  */
 public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
 
+    private static final int NUMBER_OF_REQUESTS = 2;
+
     private PlaceSearchPresenter presenter;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
+    private Logger logger;
 
     /* (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreate()
@@ -66,6 +70,7 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
         // the callback interface. If not, it throws an exception
         try {
             onPlaceUpdatedListener = (OnPlaceUpdatedListener) context;
+            logger = (Logger) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnPlaceUpdatedListener");
         }
@@ -80,6 +85,7 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
     @Override
     public void updatePlace(GeoInfo geoInfo) {
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
+        logger.logSearch(geoInfo.getPlaceName(), NUMBER_OF_REQUESTS);
         if(geoInfo.hasStations()) {
             presenter.saveRequest(geoInfo, onPlaceUpdatedListener.getHistorySharedPreferences());
         }
