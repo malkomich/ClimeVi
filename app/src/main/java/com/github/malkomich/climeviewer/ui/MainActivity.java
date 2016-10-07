@@ -1,10 +1,11 @@
 package com.github.malkomich.climeviewer.ui;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.github.malkomich.climeviewer.ui.view.WeatherView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * Main activity, composed with fragments, which launch the application functionality.
@@ -93,13 +96,17 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        initializeAds();
+        if(isGooglePlayServicesAvailable()) {
+            setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-        fab.setOnLongClickListener(this);
+            initializeAds();
+
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(this);
+            fab.setOnLongClickListener(this);
+        }
+
     }
 
     /* (non-Javadoc)
@@ -150,5 +157,30 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
 
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
+    }
+
+    /**
+     * Check if Google Play Services is installed and updated to the required version.
+     *
+     * @return boolean
+     */
+    private boolean isGooglePlayServicesAvailable() {
+
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int status = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        if(status != ConnectionResult.SUCCESS) {
+            if(googleApiAvailability.isUserResolvableError(status)) {
+                Dialog dialog = googleApiAvailability.getErrorDialog(this, status, 0);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                });
+                dialog.show();
+            }
+            return false;
+        }
+        return true;
     }
 }
