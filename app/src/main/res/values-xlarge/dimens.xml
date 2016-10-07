@@ -13,7 +13,7 @@
     <dimen name="border_radius_large">60dp</dimen>
 
     <dimen name="elevation">30dp</dimen>
-    <dimen name="slide_height">600dp</dimen>
+    <dimen name="slide_height">350dp</dimen>
 
     <dimen name="bar_height">350dp</dimen>
     <dimen name="bar_width">60dp</dimen>
