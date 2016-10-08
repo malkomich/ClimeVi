@@ -7,5 +7,7 @@ import com.github.malkomich.climeviewer.model.GeoInfo;
  */
 public interface PlaceSearchView {
 
+    String DATATYPE = "geolocation";
+
     void updatePlace(GeoInfo geoInfo);
 }

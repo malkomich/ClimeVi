@@ -20,12 +20,12 @@ public interface Logger {
     /**
      * Logs a place search event.
      *
+     * @param dataType
+     *                Indicates the type of data requested to the API. For instance <strong>weather</strong> to get
+     *                data like temperature or humidity of the place, or <strong>geolocation</strong> to get data
+     *                like coordinates, country or population
      * @param location
      *                 Name of place requested
-     * @param searchLevel
-     *                    Indicates the number of requests to the API done by the search. For instance searching from
-     *                    history produces only <strong>1</strong> requests (for weather data), and searching from
-     *                    autocomplete field produces <strong>2</strong> requests(geolocation & weather data)
      */
-    void logSearch(String location, int searchLevel);
+    void logSearch(String dataType, String location);
 }

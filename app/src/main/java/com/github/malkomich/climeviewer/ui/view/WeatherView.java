@@ -7,6 +7,8 @@ import com.github.malkomich.climeviewer.model.GeoPoints;
  */
 public interface WeatherView extends BaseView {
 
+    String DATA_TYPE = "weather";
+
     /**
      * Update the weather info in the view, thanks to geolocation points of the area.
      *

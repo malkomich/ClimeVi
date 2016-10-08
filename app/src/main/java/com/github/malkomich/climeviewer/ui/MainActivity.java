@@ -48,6 +48,7 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
         if(geoInfo.hasStations()) {
             // Show weather info fragment
             WeatherView weatherView = (WeatherView) getSupportFragmentManager().findFragmentById(R.id.temp_fragment);
+            logSearch(WeatherView.DATA_TYPE, geoInfo.getPlaceName());
             weatherView.updateWeather(geoInfo.getAreaPoints());
         } else {
             Toast.makeText(this, R.string.no_stations_data, Toast.LENGTH_SHORT).show();
@@ -200,10 +201,10 @@ public class MainActivity extends FragmentActivity implements OnPlaceUpdatedList
      * @see com.github.malkomich.climeviewer.callback.Logger#logSearch()
      */
     @Override
-    public void logSearch(String location, int searchLevel) {
+    public void logSearch(String dataType, String location) {
         Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.SEARCH_TERM, dataType);
         params.putString(FirebaseAnalytics.Param.LOCATION, location);
-        params.putInt(FirebaseAnalytics.Param.LEVEL, searchLevel);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, params);
     }
 }

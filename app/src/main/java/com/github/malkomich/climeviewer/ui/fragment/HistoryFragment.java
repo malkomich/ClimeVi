@@ -27,8 +27,6 @@ import java.util.List;
  */
 public class HistoryFragment extends ListFragment implements HistoryView {
 
-    private static final int NUMBER_OF_REQUESTS = 1;
-
     private HistoryPresenter presenter;
     private ViewGroup hiddenPanel;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
@@ -91,7 +89,6 @@ public class HistoryFragment extends ListFragment implements HistoryView {
     @Override
     public void updatePlace(GeoInfo geoInfo) {
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
-        logger.logSearch(geoInfo.getPlaceName(), NUMBER_OF_REQUESTS);
     }
 
     /* (non-Javadoc)

@@ -22,8 +22,6 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
  */
 public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
 
-    private static final int NUMBER_OF_REQUESTS = 2;
-
     private PlaceSearchPresenter presenter;
     private OnPlaceUpdatedListener onPlaceUpdatedListener;
     private Logger logger;
@@ -84,8 +82,10 @@ public class PlaceSearchFragment extends Fragment implements PlaceSearchView {
      */
     @Override
     public void updatePlace(GeoInfo geoInfo) {
+
+        logger.logSearch(DATATYPE, geoInfo.getPlaceName());
+
         onPlaceUpdatedListener.onPlaceUpdated(geoInfo);
-        logger.logSearch(geoInfo.getPlaceName(), NUMBER_OF_REQUESTS);
         if(geoInfo.hasStations()) {
             presenter.saveRequest(geoInfo, onPlaceUpdatedListener.getHistorySharedPreferences());
         }
