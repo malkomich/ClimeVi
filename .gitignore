@@ -49,3 +49,6 @@ gen-external-apklibs
 *~
 .Trash-*
 Thumbs.db
+
+# Private files
+app/google-services.json
