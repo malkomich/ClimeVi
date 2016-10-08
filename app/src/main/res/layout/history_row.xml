@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/ListView.History">
+    style="@style/HistoryRowTheme">
 
     <TextView
         android:id="@+id/row_place_name"
